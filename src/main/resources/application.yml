@@ -1,0 +1,27 @@
+server:
+  port: ${PORT:8080}
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
+spring:
+  data:
+    mongodb:
+      password: ENC(CTwEVPTP0gibe8QmB6u230tMYcQnB2+vwJAW18vebBo3lUpMxgVDSF2+ECBC6JsQZpewFD7e/HyXyULQQpuT+g==)
+      uri: mongodb+srv://mongo:${spring.data.mongodb.password}@cluster0.pctgu.mongodb.net/Practice?retryWrites=true&w=majority
+  devtools:
+    restart:
+      enabled: true
+      exclude: static/**,templates/**
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            repository:
+              ReactiveMongoRepository: DEBUG
+            core:
+              ReactiveMongoTemplate: DEBUG

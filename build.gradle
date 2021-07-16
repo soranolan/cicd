@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'org.sonarqube' version '3.3'
+	id 'jacoco'
 }
 
 group = 'com.example'
@@ -27,6 +29,30 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
+	
+	// https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
+	implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.3'
+	
+	// https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
+	implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
+	
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	
+}
+
+sonarqube {
+	properties {
+		property 'sonar.projectKey', 'soranolan_cicd'
+		property 'sonar.organization', 'soranolan'
+		property 'sonar.host.url', 'https://sonarcloud.io'
+	}
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
 }
 
 test {
