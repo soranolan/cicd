@@ -2,13 +2,13 @@ package com.example.cicd.core.enums;
 
 public enum PathInformation {
 	
-	VERSION("v1.0.0"),
-	
 	MODULE("api"),
+	
+	VERSION("v1.0.0"),
 	
 	APP("todolist"),
 	
-	DEFAULT("/" + VERSION.value() + "/" + MODULE.value() + "/" + APP.value());
+	DEFAULT("/" + MODULE.value() + "/" + VERSION.value() + "/" + APP.value());
 	
 	private final String value;
 	
