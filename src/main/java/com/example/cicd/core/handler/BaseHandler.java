@@ -19,6 +19,20 @@ public class BaseHandler {
 	 * <pre>
 	 * 
 	 * @param producer object(Mono or Flux)
+	 * @return Mono
+	 */
+	public Mono<ServerResponse> okResponse(Object producer) {
+		return ok().contentType(APPLICATION_JSON).bodyValue(producer);
+	}
+	
+	/**
+	 * <pre>
+	 * HttpStatus	: 200
+	 * ContentType	: JSON
+	 * Method		: body
+	 * <pre>
+	 * 
+	 * @param producer object(Mono or Flux)
 	 * @param elementClass target class
 	 * @return Mono
 	 */
