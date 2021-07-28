@@ -1,5 +1,7 @@
 package com.example.cicd.core.conf;
 
+import static com.example.cicd.core.enums.PathInformation.DEFAULT;
+
 import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
@@ -17,9 +19,13 @@ public class SecurityConfig {
 	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 		http
 			.cors()
-			.and()
+		.and()
 			.csrf().disable()
-			.authorizeExchange().anyExchange().permitAll();
+			.formLogin().disable()
+			.httpBasic().disable()
+			.authorizeExchange().pathMatchers(DEFAULT.value() + "/signup/**").permitAll()
+		.and()
+			.authorizeExchange().anyExchange().authenticated();
 		return http.build();
 	}
 	
