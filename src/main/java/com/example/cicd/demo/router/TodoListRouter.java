@@ -21,7 +21,7 @@ import com.example.cicd.demo.handler.TodoListHandler;
 public class TodoListRouter {
 	
 	@Bean
-	public RouterFunction<ServerResponse> route(TodoListHandler handler) {
+	public RouterFunction<ServerResponse> todolistRoute(TodoListHandler handler) {
 		return RouterFunctions
 				.route(GET(DEFAULT.value() + "/{creator}&{sortBy}").and(accept(APPLICATION_JSON)), handler::all)
 				.andRoute(GET(DEFAULT.value() + QUERY_ID.value()).and(accept(APPLICATION_JSON)), handler::find)

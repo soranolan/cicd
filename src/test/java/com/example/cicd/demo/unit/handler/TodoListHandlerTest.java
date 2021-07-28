@@ -46,7 +46,7 @@ class TodoListHandlerTest {
 	
 	@BeforeEach
 	void setup() {
-		client = WebTestClient.bindToRouterFunction(router.route(handler)).build();
+		client = WebTestClient.bindToRouterFunction(router.todolistRoute(handler)).build();
 		id = "testId";
 		mockData = new TodoList();
 		mockData.setId(id);
