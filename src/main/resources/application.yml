@@ -25,3 +25,5 @@ logging:
               ReactiveMongoRepository: DEBUG
             core:
               ReactiveMongoTemplate: DEBUG
+        web: DEBUG
+        security: DEBUG
