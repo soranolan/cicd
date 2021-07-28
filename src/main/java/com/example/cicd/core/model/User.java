@@ -16,6 +16,6 @@ public class User extends BaseDocument implements Serializable {
 	
 	private String account;
 	
-	private String passwordHash;
+	private String password;
 	
 }
