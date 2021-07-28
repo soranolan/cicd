@@ -25,6 +25,8 @@ public class SecurityConfig {
 			.httpBasic().disable()
 			.authorizeExchange().pathMatchers(DEFAULT.value() + "/signup/**").permitAll()
 		.and()
+			.authorizeExchange().pathMatchers(DEFAULT.value() + "/signin/**").permitAll()
+		.and()
 			.authorizeExchange().anyExchange().authenticated();
 		return http.build();
 	}
