@@ -1,5 +1,6 @@
 server:
   port: ${PORT:8080}
+  shutdown: graceful
 
 jasypt:
   encryptor:
@@ -14,16 +15,3 @@ spring:
     restart:
       enabled: true
       exclude: static/**,templates/**
-
-logging:
-  level:
-    org:
-      springframework:
-        data:
-          mongodb:
-            repository:
-              ReactiveMongoRepository: DEBUG
-            core:
-              ReactiveMongoTemplate: DEBUG
-        web: DEBUG
-        security: DEBUG
