@@ -14,6 +14,9 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	
+	// Exclude Logback for Log4j2
+	implementation.exclude module: 'spring-boot-starter-logging'
 }
 
 repositories {
@@ -32,14 +35,32 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	
+	// Log4j2
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	// https://mvnrepository.com/artifact/com.lmax/disruptor
+	implementation group: 'com.lmax', name: 'disruptor', version: '3.4.4'
+	
+	// Jasypt
 	// https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
 	implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.3'
 	
-	// https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
-	implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
-	
+	// Apache Commons
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
+	implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+	
+	// Argon2 dependency
+	// https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+	implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
+	
+	// Paseto for java
+	// https://mvnrepository.com/artifact/dev.paseto/jpaseto-api
+	implementation group: 'dev.paseto', name: 'jpaseto-api', version: '0.6.0'
+	// https://mvnrepository.com/artifact/dev.paseto/jpaseto-impl
+	implementation group: 'dev.paseto', name: 'jpaseto-impl', version: '0.6.0'
+	// https://mvnrepository.com/artifact/dev.paseto/jpaseto-jackson
+	implementation group: 'dev.paseto', name: 'jpaseto-jackson', version: '0.6.0'
 	
 }
 
