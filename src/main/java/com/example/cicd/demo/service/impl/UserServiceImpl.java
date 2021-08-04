@@ -6,6 +6,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.util.Argon2Utils;
 import com.example.cicd.core.util.DateUtils;
 import com.example.cicd.demo.repository.IUserRepository;
 import com.example.cicd.demo.service.IUserService;
@@ -34,6 +35,7 @@ public class UserServiceImpl implements IUserService {
 		String now = DateUtils.now();
 		if (Optional.ofNullable(entity.getCreatedAt()).isEmpty()) { entity.setCreatedAt(now); }
 		if (Optional.ofNullable(entity.getUpdatedAt()).isEmpty()) { entity.setUpdatedAt(now); }
+		entity.setPassword(Argon2Utils.encode(entity.getPassword()));
 		return repository.insert(entity);
 	}
 	
