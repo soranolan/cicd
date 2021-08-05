@@ -34,9 +34,14 @@ public class SigninHandler extends BaseHandler {
 		Mono<User> signinUser = request.bodyToMono(User.class);
 		Mono<Map<String, Object>> exist = signinUser.zipWith(existUser).flatMap(objects -> {
 			boolean isMatch = Argon2Utils.matches(objects.getT1().getPassword(), objects.getT2().getPassword());
+			if (log.isDebugEnabled()) { log.debug("[SEARCH TAG] signin isMatch >>> [{}]", isMatch); }
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("isMatch", isMatch);
-			if (isMatch) { result.put("token", PasetoUtils.compact(account)); }
+			
+			Map<String, Object> claims = new HashMap<String, Object>();
+			claims.put("role", objects.getT2().getRoles());
+			
+			if (isMatch) { result.put("token", PasetoUtils.compact(account, claims)); }
 			return Mono.just(result);
 		});
 		return okResponse(exist, Map.class);

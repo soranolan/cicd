@@ -90,6 +90,16 @@ public class PasetoUtils {
 		return builder.compact();
 	}
 	
+	public static boolean valid(String token) {
+		try {
+			parser.parse(token);
+			return true;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return false;
+	}
+	
 	public static Paseto parse(String token) {
 		return parser.parse(token);
 	}
