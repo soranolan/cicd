@@ -12,23 +12,26 @@ import org.springframework.stereotype.Component;
 import com.example.cicd.core.util.PasetoUtils;
 
 import dev.paseto.jpaseto.Claims;
-import lombok.AllArgsConstructor;
 import reactor.core.publisher.Mono;
 
-@AllArgsConstructor
 @Component
-public class AuthenticationManager implements ReactiveAuthenticationManager {
+public class CustomAuthenticationManager implements ReactiveAuthenticationManager {
 	
-	@Override
 	@SuppressWarnings("unchecked")
+	@Override
 	public Mono<Authentication> authenticate(Authentication authentication) {
-		String authToken = authentication.getCredentials().toString();
-		return Mono.just(PasetoUtils.valid(authToken)).filter(valid -> valid).switchIfEmpty(Mono.empty())
+		String token = authentication.getCredentials().toString();
+		return Mono.just(PasetoUtils.valid(token))
+				.filter(valid -> valid)
+				.switchIfEmpty(Mono.empty())
 				.map(valid -> {
-					Claims claims = PasetoUtils.parse(authToken).getClaims();
+					Claims claims = PasetoUtils.parse(token).getClaims();
 					String username = claims.getSubject();
-					List<String> rolesMap = claims.get("role", List.class);
-					return new UsernamePasswordAuthenticationToken(username, null, rolesMap.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+					List<String> roles = claims.get("role", List.class);
+					return new UsernamePasswordAuthenticationToken(username, null, roles.stream()
+																						.map(SimpleGrantedAuthority::new)
+																						.collect(Collectors.toList())
+																	);
 				});
 	}
 	

@@ -9,17 +9,17 @@ import org.springframework.security.web.server.context.ServerSecurityContextRepo
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
-import com.example.cicd.core.misc.AuthenticationManager;
+import com.example.cicd.core.misc.CustomAuthenticationManager;
 
 import reactor.core.publisher.Mono;
 
 @Component
-public class SecurityContextRepository implements ServerSecurityContextRepository {
+public class CustomSecurityContextRepository implements ServerSecurityContextRepository {
 	
-	private AuthenticationManager authenticationManager;
+	private CustomAuthenticationManager manager;
 	
-	public SecurityContextRepository(AuthenticationManager authenticationManager) {
-		this.authenticationManager = authenticationManager;
+	public CustomSecurityContextRepository(CustomAuthenticationManager manager) {
+		this.manager = manager;
 	}
 	
 	@Override
@@ -29,11 +29,13 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 	
 	@Override
 	public Mono<SecurityContext> load(ServerWebExchange swe) {
-		return Mono.justOrEmpty(swe.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION))
-				.filter(authHeader -> authHeader.startsWith("Bearer ")).flatMap(authHeader -> {
-					String authToken = authHeader.substring(7);
-					Authentication auth = new UsernamePasswordAuthenticationToken(authToken, authToken);
-					return this.authenticationManager.authenticate(auth).map(SecurityContextImpl::new);
+		return Mono.justOrEmpty(swe.getRequest().getHeaders()
+				.getFirst(HttpHeaders.AUTHORIZATION))
+				.filter(header -> header.startsWith("Bearer "))
+				.flatMap(header -> {
+					String token = header.substring(7);
+					Authentication authentication = new UsernamePasswordAuthenticationToken(token, token);
+					return manager.authenticate(authentication).map(SecurityContextImpl::new);
 				});
 	}
 	

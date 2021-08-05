@@ -5,6 +5,7 @@ import static com.example.cicd.core.enums.PathInformation.DEFAULT;
 import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -12,19 +13,20 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
-import com.example.cicd.core.misc.AuthenticationManager;
-import com.example.cicd.core.repository.SecurityContextRepository;
+import com.example.cicd.core.misc.CustomAuthenticationManager;
+import com.example.cicd.core.repository.CustomSecurityContextRepository;
 
 @EnableWebFluxSecurity
+@EnableReactiveMethodSecurity
 public class SecurityConfig {
 	
-	private AuthenticationManager authenticationManager;
+	private CustomAuthenticationManager manager;
 	
-	private SecurityContextRepository securityContextRepository;
+	private CustomSecurityContextRepository repository;
 	
-	public SecurityConfig(AuthenticationManager authenticationManager, SecurityContextRepository securityContextRepository) {
-		this.authenticationManager = authenticationManager;
-		this.securityContextRepository = securityContextRepository;
+	public SecurityConfig(CustomAuthenticationManager manager, CustomSecurityContextRepository repository) {
+		this.manager = manager;
+		this.repository = repository;
 	}
 	
 	@Bean
@@ -35,8 +37,8 @@ public class SecurityConfig {
 			.csrf().disable()
 			.formLogin().disable()
 			.httpBasic().disable()
-			.authenticationManager(authenticationManager)
-			.securityContextRepository(securityContextRepository)
+			.authenticationManager(manager)
+			.securityContextRepository(repository)
 			.authorizeExchange().pathMatchers(DEFAULT.value() + "/signup/**").permitAll()
 		.and()
 			.authorizeExchange().pathMatchers(DEFAULT.value() + "/signin/**").permitAll()
