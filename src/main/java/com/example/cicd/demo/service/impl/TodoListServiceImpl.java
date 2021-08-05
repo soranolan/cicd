@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.example.cicd.core.util.DateUtils;
@@ -15,6 +16,7 @@ import com.example.cicd.demo.service.ITodoListService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@PreAuthorize("hasRole('USER')")
 @Service
 public class TodoListServiceImpl implements ITodoListService {
 	

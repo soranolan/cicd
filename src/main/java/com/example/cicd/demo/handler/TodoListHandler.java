@@ -4,6 +4,7 @@ import static com.example.cicd.core.enums.EntityKey.CREATOR;
 import static com.example.cicd.core.enums.PathVariable.ID;
 import static com.example.cicd.core.enums.PathVariable.SORT_BY;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -16,6 +17,7 @@ import com.example.cicd.demo.service.ITodoListService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@PreAuthorize("hasRole('USER')")
 @Component
 public class TodoListHandler extends BaseHandler {
 	
