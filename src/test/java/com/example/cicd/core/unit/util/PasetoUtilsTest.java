@@ -4,9 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
-import java.security.NoSuchAlgorithmException;
-import java.security.Provider;
-import java.security.Security;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,24 +24,6 @@ public class PasetoUtilsTest {
 	@BeforeEach
 	void setup() {
 		subject = "subject";
-	}
-	
-//	@Test
-	void test_algo() throws NoSuchAlgorithmException {
-		boolean isExist = false;
-		for (Provider provider : Security.getProviders()) {
-			for (Provider.Service service : provider.getServices()) {
-				String algorithm = service.getAlgorithm();
-				if ("Ed25519".equals(algorithm)) {
-					System.out.println(algorithm);
-					System.out.println(service);
-					isExist = true;
-				}
-			}
-		}
-		if (!isExist) {
-			throw new NoSuchAlgorithmException();
-		}
 	}
 	
 	@Test
