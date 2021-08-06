@@ -33,7 +33,7 @@ public class PasetoUtils {
 	private static String PASETO_ALGORITHM = System.getenv("PASETO_ALGORITHM");
 	private static String PASETO_ISSUER = System.getenv("PASETO_ISSUER");
 	private static String PASETO_AUDIENCE = System.getenv("PASETO_AUDIENCE");
-	private static String PASETO_TOKEN_ID = System.getenv("PASETO_AUDIENCE");
+	private static String PASETO_TOKEN_ID = System.getenv("PASETO_TOKEN_ID");
 	private static String PASETO_KEY_ID = System.getenv("PASETO_KEY_ID");
 	private static String PASETO_PRIVATE_KEY = System.getenv("PASETO_PRIVATE_KEY");
 	private static String PASETO_PUBLIC_KEY = System.getenv("PASETO_PUBLIC_KEY");
