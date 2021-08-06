@@ -50,7 +50,7 @@ public class SecurityConfig {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:8081"));
+		config.setAllowedOrigins(Arrays.asList("http://localhost:8081", "https://vue-ci-cd-practice.herokuapp.com"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
 		
