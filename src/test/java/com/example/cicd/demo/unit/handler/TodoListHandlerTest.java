@@ -1,5 +1,6 @@
 package com.example.cicd.demo.unit.handler;
 
+import static com.example.cicd.core.enums.PathInformation.DEFAULT;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -13,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import com.example.cicd.core.enums.PathInformation;
 import com.example.cicd.demo.handler.TodoListHandler;
 import com.example.cicd.demo.helper.impl.TodoListHandlerHelperImpl;
 import com.example.cicd.demo.model.TodoList;
@@ -64,7 +64,7 @@ class TodoListHandlerTest {
 		Flux<TodoList> expect = Flux.just(mockData, mockData);
 		when(service.findAllByCreator(anyString(), anyString())).thenReturn(expect);
 		
-		client.get().uri(PathInformation.DEFAULT.value() + "/creator&createdAt:DESC")
+		client.get().uri(DEFAULT.value() + "/creator&createdAt:DESC")
 					.accept(APPLICATION_JSON)
 					.exchange()
 					.expectStatus().isOk()
@@ -78,7 +78,7 @@ class TodoListHandlerTest {
 		Mono<TodoList> expect = Mono.just(mockData);
 		when(service.find(anyString())).thenReturn(expect);
 		
-		client.get().uri(PathInformation.DEFAULT.value() + "/" + id)
+		client.get().uri(DEFAULT.value() + "/" + id)
 					.accept(APPLICATION_JSON)
 					.exchange()
 					.expectStatus().isOk()
@@ -92,7 +92,7 @@ class TodoListHandlerTest {
 		Mono<TodoList> expect = Mono.empty();
 		when(service.find(anyString())).thenReturn(expect);
 		
-		client.get().uri(PathInformation.DEFAULT.value() + "/" + id)
+		client.get().uri(DEFAULT.value() + "/" + id)
 					.accept(APPLICATION_JSON)
 					.exchange()
 					.expectStatus().isNotFound();
@@ -103,7 +103,7 @@ class TodoListHandlerTest {
 		Mono<TodoList> expect = Mono.just(mockData);
 		when(service.add(any(TodoList.class))).thenReturn(expect);
 		
-		client.post().uri(PathInformation.DEFAULT.value())
+		client.post().uri(DEFAULT.value())
 					.accept(APPLICATION_JSON)
 					.bodyValue(mockData)
 					.exchange()
@@ -123,7 +123,7 @@ class TodoListHandlerTest {
 		Mono<TodoList> expectModify = Mono.just(mockData);
 		when(service.modify(any(TodoList.class))).thenReturn(expectModify);
 		
-		client.put().uri(PathInformation.DEFAULT.value() + "/" + id)
+		client.put().uri(DEFAULT.value() + "/" + id)
 					.accept(APPLICATION_JSON)
 					.bodyValue(mockData)
 					.exchange()
@@ -138,7 +138,7 @@ class TodoListHandlerTest {
 		Mono<TodoList> expect = Mono.empty();
 		when(service.find(anyString())).thenReturn(expect);
 		
-		client.put().uri(PathInformation.DEFAULT.value() + "/" + id)
+		client.put().uri(DEFAULT.value() + "/" + id)
 					.accept(APPLICATION_JSON)
 					.bodyValue(mockData)
 					.exchange()
@@ -153,7 +153,7 @@ class TodoListHandlerTest {
 		Mono<Void> expect = Mono.empty();
 		when(service.remove(id)).thenReturn(expect);
 		
-		client.delete().uri(PathInformation.DEFAULT.value() + "/" + id)
+		client.delete().uri(DEFAULT.value() + "/" + id)
 					.accept(APPLICATION_JSON)
 					.exchange()
 					.expectStatus().isOk()
@@ -165,7 +165,7 @@ class TodoListHandlerTest {
 		Mono<TodoList> expect = Mono.empty();
 		when(service.find(anyString())).thenReturn(expect);
 		
-		client.delete().uri(PathInformation.DEFAULT.value() + "/" + id)
+		client.delete().uri(DEFAULT.value() + "/" + id)
 					.accept(APPLICATION_JSON)
 					.exchange()
 					.expectStatus().isNotFound();
