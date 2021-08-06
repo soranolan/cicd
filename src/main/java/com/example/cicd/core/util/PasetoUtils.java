@@ -48,7 +48,8 @@ public class PasetoUtils {
 	
 	static {
 		try {
-			KeyFactory keyFactory = KeyFactory.getInstance(PASETO_ALGORITHM);
+//			KeyFactory keyFactory = KeyFactory.getInstance(PASETO_ALGORITHM);
+			KeyFactory keyFactory = KeyFactory.getInstance("Ed25519");
 			
 			byte[] privateKeyBytes = Base64.getDecoder().decode(PASETO_PRIVATE_KEY);
 			PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
