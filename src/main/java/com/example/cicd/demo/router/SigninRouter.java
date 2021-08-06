@@ -19,7 +19,7 @@ public class SigninRouter {
 	@Bean
 	public RouterFunction<ServerResponse> signinRoute(SigninHandler handler) {
 		return RouterFunctions
-				.route(POST(DEFAULT.value() + "/signin/{account}").and(accept(APPLICATION_JSON)), handler::signIn);
+				.route(POST(DEFAULT.value() + "/signin/{username}").and(accept(APPLICATION_JSON)), handler::signIn);
 	}
 	
 }

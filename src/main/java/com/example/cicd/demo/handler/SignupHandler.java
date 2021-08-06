@@ -24,9 +24,9 @@ public class SignupHandler extends BaseHandler {
 		return createdResponse(user, User.class);
 	}
 	
-	public Mono<ServerResponse> checkAccount(ServerRequest request) {
-		String account = request.pathVariable("account");
-		Mono<User> user = service.findOneByAccount(account);
+	public Mono<ServerResponse> checkUsername(ServerRequest request) {
+		String username = request.pathVariable("username");
+		Mono<User> user = service.findOneByUsername(username);
 		return okResponse(user, User.class);
 	}
 	

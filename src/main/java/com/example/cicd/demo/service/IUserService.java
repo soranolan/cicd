@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface IUserService {
 	
-	public Mono<User> findOneByAccount(String account);
+	public Mono<User> findOneByUsername(String username);
 	
 	public Mono<User> add(User entity);
 	

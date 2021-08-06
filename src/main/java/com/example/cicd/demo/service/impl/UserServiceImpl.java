@@ -23,9 +23,9 @@ public class UserServiceImpl implements IUserService {
 	}
 	
 	@Override
-	public Mono<User> findOneByAccount(String account) {
+	public Mono<User> findOneByUsername(String username) {
 		User probe = new User();
-		probe.setUsername(account);
+		probe.setUsername(username);
 		probe.setEnabled(true);
 		Example<User> example = Example.of(probe);
 		return repository.findOne(example);
