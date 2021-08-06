@@ -2,7 +2,7 @@
 <configuration>
 	
 	<Properties>
-		<Property name="BASE_DIR">./logs</Property>
+		<Property name="BASE_DIR">/deployments/applogs</Property>
 		<Property name="APP_NAME_U">CICD</Property>
 		<Property name="APP_NAME_L">cicd</Property>
 		<Property name="PATTERN">%d{yyyy/MM/dd HH:mm:ss.SSS} || %-5p || [%t] || %C.%M (%F:%L) || Detail = %m%n%throwable</Property>
