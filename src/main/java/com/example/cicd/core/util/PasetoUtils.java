@@ -48,8 +48,7 @@ public class PasetoUtils {
 	
 	static {
 		try {
-//			KeyFactory keyFactory = KeyFactory.getInstance(PASETO_ALGORITHM);
-			KeyFactory keyFactory = KeyFactory.getInstance("Ed25519");
+			KeyFactory keyFactory = KeyFactory.getInstance(PASETO_ALGORITHM);
 			
 			byte[] privateKeyBytes = Base64.getDecoder().decode(PASETO_PRIVATE_KEY);
 			PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
@@ -66,7 +65,9 @@ public class PasetoUtils {
 							.requireTokenId(PASETO_TOKEN_ID)
 							.requireKeyId(PASETO_KEY_ID)
 							.build();
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+		} catch (NoSuchAlgorithmException e) {
+			log.error("can't find algorithm " + PASETO_ALGORITHM + e.getMessage(), e);
+		} catch (InvalidKeySpecException e) {
 			log.error(e.getMessage(), e);
 		}
 	}
