@@ -14,6 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JASYPT_ENCRYPTOR_PASSWORD: ${{ secrets.JASYPT_ENCRYPTOR_PASSWORD }}
+      PASETO_ALGORITHM: ${{ secrets.PASETO_ALGORITHM }}
+      PASETO_AUDIENCE: ${{ secrets.PASETO_AUDIENCE }}
+      PASETO_ISSUER: ${{ secrets.PASETO_ISSUER }}
+      PASETO_KEY_ID: ${{ secrets.PASETO_KEY_ID }}
+      PASETO_PRIVATE_KEY: ${{ secrets.PASETO_PRIVATE_KEY }}
+      PASETO_PUBLIC_KEY: ${{ secrets.PASETO_PUBLIC_KEY }}
+      PASETO_TOKEN_ID: ${{ secrets.PASETO_TOKEN_ID }}
     steps:
       - uses: actions/checkout@v2
         with:
