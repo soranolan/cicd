@@ -29,7 +29,7 @@ public class PasetoUtilsTest {
 		subject = "subject";
 	}
 	
-	@Test
+//	@Test
 	void test_algo() throws NoSuchAlgorithmException {
 		boolean isExist = false;
 		for (Provider provider : Security.getProviders()) {
@@ -55,13 +55,13 @@ public class PasetoUtilsTest {
 		}
 	}
 	
-//	@Test
+	@Test
 	void test_compact_without_claims() {
 		String test = PasetoUtils.compact(subject);
 		assertThat(test).isNotNull();
 	}
 	
-//	@Test
+	@Test
 	void test_compact_with_claims() {
 		Map<String, Object> claims = new HashMap<String, Object>();
 		claims.put("claim_key", "claim_value");
@@ -70,7 +70,7 @@ public class PasetoUtilsTest {
 		assertThat(test).isNotNull();
 	}
 	
-//	@Test
+	@Test
 	void test_valid_pass() {
 		String token = PasetoUtils.compact(subject);
 		boolean test = PasetoUtils.valid(token);
@@ -78,7 +78,7 @@ public class PasetoUtilsTest {
 		assertThat(test).isEqualTo(true);
 	}
 	
-//	@Test
+	@Test
 	void test_valid_fail() {
 		String token = PasetoUtils.compact(subject);
 		boolean test = PasetoUtils.valid(token + "!");
@@ -86,7 +86,7 @@ public class PasetoUtilsTest {
 		assertThat(test).isEqualTo(false);
 	}
 	
-//	@Test
+	@Test
 	void test_parse() {
 		String token = PasetoUtils.compact(subject);
 		Paseto test = PasetoUtils.parse(token);

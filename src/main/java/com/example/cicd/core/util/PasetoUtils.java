@@ -3,14 +3,14 @@ package com.example.cicd.core.util;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.KeyFactory;
+//import java.security.KeyFactory;
 import java.security.KeyPair;
-import java.security.NoSuchAlgorithmException;
+//import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
+//import java.security.spec.InvalidKeySpecException;
+//import java.security.spec.PKCS8EncodedKeySpec;
+//import java.security.spec.X509EncodedKeySpec;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Base64;
@@ -30,13 +30,13 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class PasetoUtils {
 	
-	private static String PASETO_ALGORITHM = System.getenv("PASETO_ALGORITHM");
+//	private static String PASETO_ALGORITHM = System.getenv("PASETO_ALGORITHM");
 	private static String PASETO_ISSUER = System.getenv("PASETO_ISSUER");
 	private static String PASETO_AUDIENCE = System.getenv("PASETO_AUDIENCE");
 	private static String PASETO_TOKEN_ID = System.getenv("PASETO_TOKEN_ID");
 	private static String PASETO_KEY_ID = System.getenv("PASETO_KEY_ID");
-	private static String PASETO_PRIVATE_KEY = System.getenv("PASETO_PRIVATE_KEY");
-	private static String PASETO_PUBLIC_KEY = System.getenv("PASETO_PUBLIC_KEY");
+//	private static String PASETO_PRIVATE_KEY = System.getenv("PASETO_PRIVATE_KEY");
+//	private static String PASETO_PUBLIC_KEY = System.getenv("PASETO_PUBLIC_KEY");
 	
 	private static PrivateKey privateKey;
 	private static PublicKey publicKey;
@@ -47,16 +47,20 @@ public class PasetoUtils {
 	}
 	
 	static {
-		try {
-			KeyFactory keyFactory = KeyFactory.getInstance(PASETO_ALGORITHM);
+//		try {
+//			KeyFactory keyFactory = KeyFactory.getInstance(PASETO_ALGORITHM);
 			
-			byte[] privateKeyBytes = Base64.getDecoder().decode(PASETO_PRIVATE_KEY);
-			PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
-			privateKey = keyFactory.generatePrivate(privateKeySpec);
+//			byte[] privateKeyBytes = Base64.getDecoder().decode(PASETO_PRIVATE_KEY);
+//			PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
+//			privateKey = keyFactory.generatePrivate(privateKeySpec);
 			
-			byte[] publicKeyBytes = Base64.getDecoder().decode(PASETO_PUBLIC_KEY);
-			X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
-			publicKey = keyFactory.generatePublic(publicKeySpec);
+//			byte[] publicKeyBytes = Base64.getDecoder().decode(PASETO_PUBLIC_KEY);
+//			X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
+//			publicKey = keyFactory.generatePublic(publicKeySpec);
+			
+			KeyPair keyPair = Keys.keyPairFor(Version.V2);
+			privateKey = keyPair.getPrivate();
+			publicKey = keyPair.getPublic();
 			
 			parser = Pasetos.parserBuilder()
 							.setPublicKey(publicKey)
@@ -65,11 +69,11 @@ public class PasetoUtils {
 							.requireTokenId(PASETO_TOKEN_ID)
 							.requireKeyId(PASETO_KEY_ID)
 							.build();
-		} catch (NoSuchAlgorithmException e) {
-			log.error("can't find algorithm " + PASETO_ALGORITHM + e.getMessage(), e);
-		} catch (InvalidKeySpecException e) {
-			log.error(e.getMessage(), e);
-		}
+//		} catch (NoSuchAlgorithmException e) {
+//			log.error("can't find algorithm " + PASETO_ALGORITHM + e.getMessage(), e);
+//		} catch (InvalidKeySpecException e) {
+//			log.error(e.getMessage(), e);
+//		}
 	}
 	
 	public static String compact(String subject) {
