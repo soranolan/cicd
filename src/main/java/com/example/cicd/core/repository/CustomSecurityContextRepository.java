@@ -1,6 +1,7 @@
 package com.example.cicd.core.repository;
 
-import org.springframework.http.HttpHeaders;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -29,14 +30,13 @@ public class CustomSecurityContextRepository implements ServerSecurityContextRep
 	
 	@Override
 	public Mono<SecurityContext> load(ServerWebExchange swe) {
-		return Mono.justOrEmpty(swe.getRequest().getHeaders()
-				.getFirst(HttpHeaders.AUTHORIZATION))
-				.filter(header -> header.startsWith("Bearer "))
-				.flatMap(header -> {
-					String token = header.substring(7);
-					Authentication authentication = new UsernamePasswordAuthenticationToken(token, token);
-					return manager.authenticate(authentication).map(SecurityContextImpl::new);
-				});
+		return Mono.justOrEmpty(swe.getRequest().getHeaders().getFirst(AUTHORIZATION))
+					.filter(header -> header.startsWith("Bearer "))
+					.flatMap(header -> {
+						String token = header.substring(7);
+						Authentication authentication = new UsernamePasswordAuthenticationToken(token, token);
+						return manager.authenticate(authentication).map(SecurityContextImpl::new);
+					});
 	}
 	
 }
