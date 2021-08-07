@@ -1,6 +1,5 @@
 package com.example.cicd.core.util;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.KeyFactory;
@@ -30,13 +29,13 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class PasetoUtils {
 	
-	private static String PASETO_ALGORITHM = System.getenv("PASETO_ALGORITHM");
-	private static String PASETO_ISSUER = System.getenv("PASETO_ISSUER");
-	private static String PASETO_AUDIENCE = System.getenv("PASETO_AUDIENCE");
-	private static String PASETO_TOKEN_ID = System.getenv("PASETO_TOKEN_ID");
-	private static String PASETO_KEY_ID = System.getenv("PASETO_KEY_ID");
-	private static String PASETO_PRIVATE_KEY = System.getenv("PASETO_PRIVATE_KEY");
-	private static String PASETO_PUBLIC_KEY = System.getenv("PASETO_PUBLIC_KEY");
+	private static final String PASETO_ALGORITHM = System.getenv("PASETO_ALGORITHM");
+	private static final String PASETO_ISSUER = System.getenv("PASETO_ISSUER");
+	private static final String PASETO_AUDIENCE = System.getenv("PASETO_AUDIENCE");
+	private static final String PASETO_TOKEN_ID = System.getenv("PASETO_TOKEN_ID");
+	private static final String PASETO_KEY_ID = System.getenv("PASETO_KEY_ID");
+	private static final String PASETO_PRIVATE_KEY = System.getenv("PASETO_PRIVATE_KEY");
+	private static final String PASETO_PUBLIC_KEY = System.getenv("PASETO_PUBLIC_KEY");
 	
 	private static PrivateKey privateKey;
 	private static PublicKey publicKey;
@@ -106,8 +105,7 @@ public class PasetoUtils {
 		return parser.parse(token);
 	}
 	
-	public static void writerKeyToFile() throws FileNotFoundException, IOException {
-		String filePath = "C:\\Users\\User\\Desktop\\";
+	public static void writerKeyToFile(String filePath) throws IOException {
 		KeyPair keyPair = Keys.keyPairFor(Version.V2);
 		try (FileOutputStream fos = new FileOutputStream(filePath + "PRIVATE_KEY.txt")) {
 			byte[] encoded = keyPair.getPrivate().getEncoded();

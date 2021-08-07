@@ -16,10 +16,10 @@ public class SigninHandlerHelperImpl implements ISigninHandlerHelper {
 	@Override
 	public Map<String, Object> validateCombinator(String username, User signin, User exist) {
 		boolean isMatch = Argon2Utils.matches(signin.getPassword(), exist.getPassword());
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<>();
 		result.put("isMatch", isMatch);
 		
-		Map<String, Object> claims = new HashMap<String, Object>();
+		Map<String, Object> claims = new HashMap<>();
 		claims.put("role", exist.getRoles());
 		
 		if (isMatch) { result.put("token", PasetoUtils.compact(username, claims)); }

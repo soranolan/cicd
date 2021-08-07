@@ -14,7 +14,7 @@ import com.example.cicd.core.util.Argon2Utils;
 
 
 @ExtendWith(MockitoExtension.class)
-public class Argon2UtilsTest {
+class Argon2UtilsTest {
 	
 	private String password;
 	
@@ -40,13 +40,13 @@ public class Argon2UtilsTest {
 	@Test
 	void test_matches_pass() {
 		boolean test = Argon2Utils.matches(password, Argon2Utils.encode(password));
-		assertThat(test).isEqualTo(true);
+		assertThat(test).isTrue();
 	}
 	
 	@Test
 	void test_matches_fail() {
 		boolean test = Argon2Utils.matches(password + "!", Argon2Utils.encode(password));
-		assertThat(test).isEqualTo(false);
+		assertThat(test).isFalse();
 	}
 	
 }

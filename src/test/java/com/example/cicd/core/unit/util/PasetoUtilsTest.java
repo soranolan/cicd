@@ -17,7 +17,7 @@ import com.example.cicd.core.util.PasetoUtils;
 import dev.paseto.jpaseto.Paseto;
 
 @ExtendWith(MockitoExtension.class)
-public class PasetoUtilsTest {
+class PasetoUtilsTest {
 	
 	private String subject;
 	
@@ -53,14 +53,14 @@ public class PasetoUtilsTest {
 	void test_valid_pass() {
 		String token = PasetoUtils.compact(subject);
 		boolean test = PasetoUtils.valid(token);
-		assertThat(test).isEqualTo(true);
+		assertThat(test).isTrue();
 	}
 	
 	@Test
 	void test_valid_fail() {
 		String token = PasetoUtils.compact(subject);
 		boolean test = PasetoUtils.valid(token + "!");
-		assertThat(test).isEqualTo(false);
+		assertThat(test).isFalse();
 	}
 	
 	@Test

@@ -21,7 +21,7 @@ import com.example.cicd.core.repository.CustomSecurityContextRepository;
 import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
-public class CustomSecurityContextRepositoryTest {
+class CustomSecurityContextRepositoryTest {
 	
 	@Mock
 	private CustomAuthenticationManager manager;

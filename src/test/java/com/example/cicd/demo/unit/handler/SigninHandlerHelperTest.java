@@ -15,7 +15,7 @@ import com.example.cicd.core.util.Argon2Utils;
 import com.example.cicd.demo.helper.impl.SigninHandlerHelperImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class SigninHandlerHelperTest {
+class SigninHandlerHelperTest {
 	
 	@InjectMocks
 	private SigninHandlerHelperImpl helper;
@@ -48,7 +48,7 @@ public class SigninHandlerHelperTest {
 		Map<String, Object> test = helper.validateCombinator(username, signin, exist);
 		
 		assertThat(test).isNotNull();
-		assertThat(test.get("isMatch")).isEqualTo(true);
+		assertThat(test).containsEntry("isMatch", true);
 		assertThat(test.get("token")).isNotNull();
 	}
 	
@@ -58,7 +58,7 @@ public class SigninHandlerHelperTest {
 		Map<String, Object> test = helper.validateCombinator(username, signin, exist);
 		
 		assertThat(test).isNotNull();
-		assertThat(test.get("isMatch")).isEqualTo(false);
+		assertThat(test).containsEntry("isMatch", false);
 		assertThat(test.get("token")).isNull();
 	}
 	
