@@ -53,7 +53,6 @@ public class PasetoUtilsTest {
 	void test_valid_pass() {
 		String token = PasetoUtils.compact(subject);
 		boolean test = PasetoUtils.valid(token);
-		assertThat(test).isNotNull();
 		assertThat(test).isEqualTo(true);
 	}
 	
@@ -61,7 +60,6 @@ public class PasetoUtilsTest {
 	void test_valid_fail() {
 		String token = PasetoUtils.compact(subject);
 		boolean test = PasetoUtils.valid(token + "!");
-		assertThat(test).isNotNull();
 		assertThat(test).isEqualTo(false);
 	}
 	

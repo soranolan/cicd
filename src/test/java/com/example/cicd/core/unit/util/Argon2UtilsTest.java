@@ -40,14 +40,12 @@ public class Argon2UtilsTest {
 	@Test
 	void test_matches_pass() {
 		boolean test = Argon2Utils.matches(password, Argon2Utils.encode(password));
-		assertThat(test).isNotNull();
 		assertThat(test).isEqualTo(true);
 	}
 	
 	@Test
 	void test_matches_fail() {
 		boolean test = Argon2Utils.matches(password + "!", Argon2Utils.encode(password));
-		assertThat(test).isNotNull();
 		assertThat(test).isEqualTo(false);
 	}
 	
