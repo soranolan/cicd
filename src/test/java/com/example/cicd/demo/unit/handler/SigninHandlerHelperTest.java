@@ -46,20 +46,14 @@ class SigninHandlerHelperTest {
 	@Test
 	void test_validateCombinator_isMatch() {
 		Map<String, Object> test = helper.validateCombinator(username, signin, exist);
-		
-		assertThat(test).isNotNull();
-		assertThat(test).containsEntry("isMatch", true);
-		assertThat(test.get("token")).isNotNull();
+		assertThat(test).isNotNull().containsEntry("isMatch", true).containsKey("token");
 	}
 	
 	@Test
 	void test_validateCombinator_isNotMatch() {
 		signin.setPassword("wordpass");
 		Map<String, Object> test = helper.validateCombinator(username, signin, exist);
-		
-		assertThat(test).isNotNull();
-		assertThat(test).containsEntry("isMatch", false);
-		assertThat(test.get("token")).isNull();
+		assertThat(test).isNotNull().containsEntry("isMatch", false).doesNotContainKey("token");
 	}
 	
 }
