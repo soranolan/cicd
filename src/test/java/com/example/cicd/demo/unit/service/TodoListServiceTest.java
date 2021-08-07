@@ -1,8 +1,5 @@
 package com.example.cicd.demo.unit.service;
 
-
-
-
 import static com.example.cicd.core.enums.EntityKey.CREATED_AT;
 import static com.example.cicd.core.enums.SortDirection.ASC;
 import static org.assertj.core.api.Assertions.assertThat;

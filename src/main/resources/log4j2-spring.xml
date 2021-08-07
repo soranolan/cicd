@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	
+	<Properties>
+		<Property name="BASE_DIR">/deployments/applogs</Property>
+		<Property name="APP_NAME_U">CICD</Property>
+		<Property name="APP_NAME_L">cicd</Property>
+		<Property name="PATTERN">%d{yyyy/MM/dd HH:mm:ss.SSS} || %-5p || [%t] || %C.%M (%F:%L) || Detail = %m%n%throwable</Property>
+	</Properties>
+	
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${PATTERN}" />
+		</Console>
+		
+		<RollingFile name="defaultFile" fileName="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}.log" filePattern="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="errorFile" fileName="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_error.log" filePattern="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_error_%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="serviceFile" fileName="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_service.log" filePattern="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_service_%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="mongodbFile" fileName="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_mongodb.log" filePattern="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_mongodb_%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="reactorFile" fileName="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_reactor.log" filePattern="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_reactor_%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	
+	<Loggers>
+		<!-- Application -->
+		<AsyncLogger name="com.example.cicd" level="DEBUG" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="com.example.cicd.demo.service" level="DEBUG" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+			<AppenderRef ref="serviceFile" />
+		</AsyncLogger>
+		
+		<!-- ThirdParty -->
+		<AsyncLogger name="org.springframework" level="DEBUG" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="com.ulisesbocchio.jasyptspringboot" level="INFO" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="org.mongodb.driver" level="INFO" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+			<AppenderRef ref="mongodbFile" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="reactor" level="DEBUG" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+			<AppenderRef ref="reactorFile" />
+		</AsyncLogger>
+		
+		<AsyncRoot level="INFO">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+		</AsyncRoot>
+	</Loggers>
+</configuration>

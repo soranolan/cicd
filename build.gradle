@@ -8,12 +8,15 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '15'
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	
+	// Exclude Logback for Log4j2
+	implementation.exclude module: 'spring-boot-starter-logging'
 }
 
 repositories {
@@ -21,23 +24,47 @@ repositories {
 }
 
 dependencies {
+	// Spring MongoDB Reactive
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	
+	// Spring Webflux
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	compileOnly 'org.projectlombok:lombok'
+	
+	// Spring Tools
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+	
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	
+	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	
-	// https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
+	// Log4j2
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	// Log4j2 Async dependency
+	implementation group: 'com.lmax', name: 'disruptor', version: '3.4.4'
+	
+	// Jasypt
 	implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.3'
 	
-	// https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
-	implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
-	
-	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	// Apache Commons
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+	
+	// Argon2 dependency
+	implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
+	
+	// Paseto for java
+	implementation group: 'dev.paseto', name: 'jpaseto-api', version: '0.6.0'
+	implementation group: 'dev.paseto', name: 'jpaseto-impl', version: '0.6.0'
+	implementation group: 'dev.paseto', name: 'jpaseto-jackson', version: '0.6.0'
 	
 }
 
