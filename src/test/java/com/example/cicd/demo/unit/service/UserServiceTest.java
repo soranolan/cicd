@@ -23,7 +23,7 @@ import com.example.cicd.demo.service.impl.UserServiceImpl;
 import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+class UserServiceTest {
 	
 	@Mock
 	private IUserRepository repository;

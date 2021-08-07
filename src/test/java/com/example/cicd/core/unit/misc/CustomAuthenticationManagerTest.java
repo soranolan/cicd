@@ -22,7 +22,7 @@ import com.example.cicd.core.util.PasetoUtils;
 import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
-public class CustomAuthenticationManagerTest {
+class CustomAuthenticationManagerTest {
 	
 	@InjectMocks
 	private CustomAuthenticationManager manager;
