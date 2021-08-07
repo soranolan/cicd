@@ -25,4 +25,10 @@ public class TodoList extends BaseDocument implements Serializable {
 	/** expiration date */
 	private String expirationDate;
 	
+	/** create by user id */
+	private String creator;
+	
+	/** shared to user id */
+	private String[] sharedTo;
+	
 }

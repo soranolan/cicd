@@ -23,10 +23,4 @@ public class BaseDocument implements Serializable {
 	/** update date time */
 	private String updatedAt;
 	
-	/** create by user id */
-	private String creator;
-	
-	/** shared to user id */
-	private String[] sharedTo;
-	
 }
