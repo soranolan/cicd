@@ -65,7 +65,7 @@ public class PasetoUtils {
 							.requireKeyId(PASETO_KEY_ID)
 							.build();
 		} catch (NoSuchAlgorithmException e) {
-			log.error("can't find algorithm " + PASETO_ALGORITHM + e.getMessage(), e);
+			log.error("can't find algorithm >>> [{}]", PASETO_ALGORITHM + e.getMessage(), e);
 		} catch (InvalidKeySpecException e) {
 			log.error(e.getMessage(), e);
 		}
