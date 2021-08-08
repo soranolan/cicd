@@ -23,4 +23,9 @@ public class BaseDocument implements Serializable {
 	/** update date time */
 	private String updatedAt;
 	
+	@Override
+	public String toString() {
+		return "BaseDocument [id=" + id + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	}
+	
 }

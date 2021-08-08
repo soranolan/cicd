@@ -1,6 +1,7 @@
 package com.example.cicd.demo.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -30,5 +31,11 @@ public class TodoList extends BaseDocument implements Serializable {
 	
 	/** shared to user id */
 	private String[] sharedTo;
+	
+	@Override
+	public String toString() {
+		return "TodoList [title=" + title + ", content=" + content + ", expirationDate=" + expirationDate + ", creator="
+				+ creator + ", sharedTo=" + Arrays.toString(sharedTo) + ", super.toString()=" + super.toString() + "]";
+	}
 	
 }

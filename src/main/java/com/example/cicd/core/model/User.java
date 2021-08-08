@@ -61,7 +61,8 @@ public class User extends BaseDocument implements UserDetails {
 	
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", enabled=" + enabled + ", roles=" + roles + "]";
+		return "User [username=" + username + ", enabled=" + enabled + ", roles=" + roles + 
+				", super.toString()=" + super.toString() + "]";
 	}
 	
 }
