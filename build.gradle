@@ -66,6 +66,9 @@ dependencies {
 	implementation group: 'dev.paseto', name: 'jpaseto-impl', version: '0.6.0'
 	implementation group: 'dev.paseto', name: 'jpaseto-jackson', version: '0.6.0'
 	
+	// org.json
+	implementation group: 'org.json', name: 'json', version: '20210307'
+	
 }
 
 sonarqube {
