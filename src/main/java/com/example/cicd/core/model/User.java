@@ -4,6 +4,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,8 +27,13 @@ public class User extends BaseDocument implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@NotNull
+	@Size(min = 1, max = 24)
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	private String username;
 	
+	@NotNull
+	@Size(min = 1, max = 24)
 	private String password;
 	
 	private boolean enabled;
