@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.validation.Validator;
 
 import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.model.User;
@@ -27,6 +28,9 @@ import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
 class SignupHandlerTest {
+	
+	@Mock
+	private Validator validator;
 	
 	@Mock
 	private UserServiceImpl service;

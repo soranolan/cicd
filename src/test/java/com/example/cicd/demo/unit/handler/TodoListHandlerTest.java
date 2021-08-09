@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.validation.Validator;
 
 import com.example.cicd.demo.handler.TodoListHandler;
 import com.example.cicd.demo.helper.impl.TodoListHandlerHelperImpl;
@@ -25,6 +26,9 @@ import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
 class TodoListHandlerTest {
+	
+	@Mock
+	private Validator validator;
 	
 	@Mock
 	private TodoListServiceImpl service;

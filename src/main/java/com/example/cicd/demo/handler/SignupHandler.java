@@ -2,6 +2,7 @@ package com.example.cicd.demo.handler;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.Validator;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
@@ -16,14 +17,19 @@ import reactor.core.publisher.Mono;
 @Component
 public class SignupHandler extends BaseHandler {
 	
+	private Validator validator;
+	
 	private IUserService service;
 	
-	public SignupHandler(IUserService service) {
+	public SignupHandler(IUserService service, Validator validator) {
 		this.service = service;
+		this.validator = validator;
 	}
 	
 	public Mono<ServerResponse> signUp(ServerRequest request) {
-		Mono<User> user = request.bodyToMono(User.class).flatMap(newUser -> service.add(newUser));
+		Mono<User> user = request.bodyToMono(User.class)
+									.doOnNext(body -> validate(body, validator))
+									.flatMap(newUser -> service.add(newUser));
 		return createdResponse(user, User.class);
 	}
 	
