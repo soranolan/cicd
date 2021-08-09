@@ -20,6 +20,7 @@ public class RequestLoggingFilter implements WebFilter {
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 		ServerHttpRequest request = exchange.getRequest();
 		InetSocketAddress remoteAddress = request.getRemoteAddress();
+		
 		JSONObject loggingRequest = new JSONObject();
 		if (remoteAddress != null) {
 			loggingRequest.put("HostAddress", remoteAddress.getAddress().getHostAddress());
@@ -32,6 +33,7 @@ public class RequestLoggingFilter implements WebFilter {
 		loggingRequest.put("Headers", request.getHeaders());
 		loggingRequest.put("QueryParams", request.getQueryParams());
 		log.info("[SEARCH_TAG] loggingRequest >>> [{}]", () -> loggingRequest.toString());
+		
 		return chain.filter(exchange);
 	}
 	
