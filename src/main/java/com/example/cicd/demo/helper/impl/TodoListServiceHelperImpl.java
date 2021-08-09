@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
@@ -14,16 +15,26 @@ import com.example.cicd.core.enums.EntityKey;
 import com.example.cicd.core.enums.SortDirection;
 import com.example.cicd.demo.helper.ITodoListServiceHelper;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Component
 public class TodoListServiceHelperImpl implements ITodoListServiceHelper {
 	
 	@Override
 	public Map<String, String> parseSortBy(String sortBy) {
-		List<String> list = Arrays.asList(sortBy.split(","));
-		return list.stream()
-					.map(pairs -> pairs.split(":"))
-					.filter(ary -> ary.length == 2)
-					.collect(Collectors.toMap(pair -> pair[0], pair -> pair[1]));
+		List<String> sortByList = Arrays.asList(sortBy.split(","));
+		Map<String, String> sortByMap = sortByList.stream()
+													.map(pairs -> pairs.split(":"))
+													.filter(ary -> ary.length == 2)
+													.collect(Collectors.toMap(pair -> pair[0], pair -> pair[1]));
+		
+		JSONObject logParams = new JSONObject();
+		logParams.put("sortByList", sortByList);
+		logParams.put("sortByMap", sortByMap);
+		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		
+		return sortByMap;
 	}
 	
 	@Override
@@ -42,6 +53,12 @@ public class TodoListServiceHelperImpl implements ITodoListServiceHelper {
 			if (isAsc) { sort = (sort == null) ? asc : sort.and(asc); }
 			if (isDesc) { sort = (sort == null) ? desc : sort.and(desc); }
 		}
+		
+		JSONObject logParams = new JSONObject();
+		logParams.put("queryMap", queryMap);
+		logParams.put("sort", sort);
+		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		
 		return sort;
 	}
 	
@@ -53,6 +70,13 @@ public class TodoListServiceHelperImpl implements ITodoListServiceHelper {
 		Map<String, String> queryMap = parseSortBy(sortBy);
 		Sort sort = parseQueryMap(queryMap);
 		if (sort == null) { sort = defaultSort; }
+		
+		JSONObject logParams = new JSONObject();
+		logParams.put("sortBy", sortBy);
+		logParams.put("queryMap", queryMap);
+		logParams.put("sort", sort);
+		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		
 		return sort;
 	}
 	

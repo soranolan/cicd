@@ -2,6 +2,7 @@ package com.example.cicd.demo.handler;
 
 import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -29,7 +30,10 @@ public class SigninHandler extends BaseHandler {
 	
 	public Mono<ServerResponse> signIn(ServerRequest request) {
 		String username = request.pathVariable("username");
-		if (log.isDebugEnabled()) { log.debug("[SEARCH TAG] signin username >>> [{}]", username); }
+		
+		JSONObject logParams = new JSONObject();
+		logParams.put("username", username);
+		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
 		
 		Mono<User> existUser = service.findOneByUsername(username);
 		Mono<User> signinUser = request.bodyToMono(User.class);
