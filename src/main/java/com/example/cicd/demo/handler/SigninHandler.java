@@ -1,5 +1,7 @@
 package com.example.cicd.demo.handler;
 
+import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+
 import java.util.Map;
 
 import org.json.JSONObject;
@@ -37,7 +39,7 @@ public class SigninHandler extends BaseHandler {
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("username", username);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		Mono<User> existUser = service.findOneByUsername(username);
 		Mono<User> signinUser = request.bodyToMono(User.class).doOnNext(body -> validate(body, validator));

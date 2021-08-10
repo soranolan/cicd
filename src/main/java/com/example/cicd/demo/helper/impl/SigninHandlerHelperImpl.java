@@ -1,5 +1,7 @@
 package com.example.cicd.demo.helper.impl;
 
+import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +28,7 @@ public class SigninHandlerHelperImpl implements ISigninHandlerHelper {
 		claims.put("role", exist.getRoles());
 		
 		if (isMatch) { result.put("token", PasetoUtils.compact(username, claims)); }
-		log.info("[SEARCH TAG] result >>> [{}]", () -> result);
+		log.info(DEFAULT.value(), () -> result);
 		return result;
 	}
 	

@@ -1,5 +1,7 @@
 package com.example.cicd.core.filter;
 
+import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+
 import java.net.InetSocketAddress;
 
 import org.json.JSONObject;
@@ -21,18 +23,18 @@ public class RequestLoggingFilter implements WebFilter {
 		ServerHttpRequest request = exchange.getRequest();
 		InetSocketAddress remoteAddress = request.getRemoteAddress();
 		
-		JSONObject loggingRequest = new JSONObject();
+		JSONObject logParams = new JSONObject();
 		if (remoteAddress != null) {
-			loggingRequest.put("HostAddress", remoteAddress.getAddress().getHostAddress());
-			loggingRequest.put("HostName", remoteAddress.getAddress().getHostName());
-			loggingRequest.put("Port", remoteAddress.getPort());
+			logParams.put("HostAddress", remoteAddress.getAddress().getHostAddress());
+			logParams.put("HostName", remoteAddress.getAddress().getHostName());
+			logParams.put("Port", remoteAddress.getPort());
 		}
-		loggingRequest.put("Method", request.getMethod());
-		loggingRequest.put("URI", request.getURI());
-		loggingRequest.put("Path", request.getPath());
-		loggingRequest.put("Headers", request.getHeaders());
-		loggingRequest.put("QueryParams", request.getQueryParams());
-		log.info("[SEARCH_TAG] loggingRequest >>> [{}]", () -> loggingRequest.toString());
+		logParams.put("Method", request.getMethod());
+		logParams.put("URI", request.getURI());
+		logParams.put("Path", request.getPath());
+		logParams.put("Headers", request.getHeaders());
+		logParams.put("QueryParams", request.getQueryParams());
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return chain.filter(exchange);
 	}

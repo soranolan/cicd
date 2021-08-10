@@ -1,5 +1,7 @@
 package com.example.cicd.demo.service.impl;
 
+import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+
 import java.util.Optional;
 
 import org.json.JSONObject;
@@ -45,7 +47,7 @@ public class TodoListServiceImpl implements ITodoListService {
 		logParams.put("probe", probe);
 		logParams.put("example", example);
 		logParams.put("sort", sort);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.findAll(example, sort);
 	}
@@ -54,7 +56,7 @@ public class TodoListServiceImpl implements ITodoListService {
 	public Mono<TodoList> find(String id) {
 		JSONObject logParams = new JSONObject();
 		logParams.put("id", id);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.findById(id);
 	}
@@ -67,7 +69,7 @@ public class TodoListServiceImpl implements ITodoListService {
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("entity", entity);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.insert(entity);
 	}
@@ -79,7 +81,7 @@ public class TodoListServiceImpl implements ITodoListService {
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("entity", entity);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.save(entity);
 	}
@@ -88,7 +90,7 @@ public class TodoListServiceImpl implements ITodoListService {
 	public Mono<Void> remove(String id) {
 		JSONObject logParams = new JSONObject();
 		logParams.put("id", id);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.deleteById(id);
 	}

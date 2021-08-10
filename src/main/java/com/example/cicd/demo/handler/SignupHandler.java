@@ -1,5 +1,7 @@
 package com.example.cicd.demo.handler;
 
+import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Validator;
@@ -38,7 +40,7 @@ public class SignupHandler extends BaseHandler {
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("username", username);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		Mono<User> user = service.findOneByUsername(username);
 		return okResponse(user, User.class);
