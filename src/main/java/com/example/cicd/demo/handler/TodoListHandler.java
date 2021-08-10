@@ -1,6 +1,7 @@
 package com.example.cicd.demo.handler;
 
 import static com.example.cicd.core.enums.EntityKey.CREATOR;
+import static com.example.cicd.core.enums.LogStatement.DEFAULT;
 import static com.example.cicd.core.enums.PathVariable.ID;
 import static com.example.cicd.core.enums.PathVariable.SORT_BY;
 
@@ -44,7 +45,7 @@ public class TodoListHandler extends BaseHandler {
 		JSONObject logParams = new JSONObject();
 		logParams.put("creator", creator);
 		logParams.put("sortBy", sortBy);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		Flux<TodoList> all = service.findAllByCreator(creator, sortBy);
 		return okResponse(all, TodoList.class);
@@ -55,7 +56,7 @@ public class TodoListHandler extends BaseHandler {
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("id", id);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		Mono<TodoList> foundMono = service.find(id);
 		return foundMono.flatMap(found -> okResponse(Mono.just(found), TodoList.class)).switchIfEmpty(notFound());
@@ -73,7 +74,7 @@ public class TodoListHandler extends BaseHandler {
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("id", id);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		Mono<TodoList> foundMono = service.find(id);
 		Mono<TodoList> newMono = request.bodyToMono(TodoList.class).doOnNext(body -> validate(body, validator));
@@ -86,7 +87,7 @@ public class TodoListHandler extends BaseHandler {
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("id", id);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		Mono<TodoList> foundMono = service.find(id);
 		return foundMono.flatMap(found -> okResponse(service.remove(found.getId()), TodoList.class)).switchIfEmpty(notFound());

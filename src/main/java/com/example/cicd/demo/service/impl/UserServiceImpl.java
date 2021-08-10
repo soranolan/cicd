@@ -1,5 +1,7 @@
 package com.example.cicd.demo.service.impl;
 
+import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+
 import java.util.Optional;
 
 import org.json.JSONObject;
@@ -36,7 +38,7 @@ public class UserServiceImpl implements IUserService {
 		logParams.put("username", username);
 		logParams.put("probe", probe);
 		logParams.put("example", example);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.findOne(example);
 	}
@@ -50,7 +52,7 @@ public class UserServiceImpl implements IUserService {
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("entity", entity);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.insert(entity);
 	}

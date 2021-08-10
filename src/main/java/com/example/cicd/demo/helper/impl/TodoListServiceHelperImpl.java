@@ -1,5 +1,7 @@
 package com.example.cicd.demo.helper.impl;
 
+import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class TodoListServiceHelperImpl implements ITodoListServiceHelper {
 		JSONObject logParams = new JSONObject();
 		logParams.put("sortByList", sortByList);
 		logParams.put("sortByMap", sortByMap);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return sortByMap;
 	}
@@ -57,7 +59,7 @@ public class TodoListServiceHelperImpl implements ITodoListServiceHelper {
 		JSONObject logParams = new JSONObject();
 		logParams.put("queryMap", queryMap);
 		logParams.put("sort", sort);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return sort;
 	}
@@ -75,7 +77,7 @@ public class TodoListServiceHelperImpl implements ITodoListServiceHelper {
 		logParams.put("sortBy", sortBy);
 		logParams.put("queryMap", queryMap);
 		logParams.put("sort", sort);
-		log.info("[SEARCH TAG] logParams >>> [{}]", () -> logParams);
+		log.info(DEFAULT.value(), () -> logParams);
 		
 		return sort;
 	}
