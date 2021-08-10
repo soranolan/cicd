@@ -5,7 +5,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
+import java.util.stream.Collectors;
+
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.server.ServerWebInputException;
 
 import reactor.core.publisher.Mono;
 
@@ -50,6 +56,17 @@ public class BaseHandler {
 	 */
 	public Mono<ServerResponse> notFound() {
 		return ServerResponse.notFound().build();
+	}
+	
+	public void validate(Object body, Validator validator) {
+		Errors errors = new BeanPropertyBindingResult(body, body.getClass().getName());
+		validator.validate(body, errors);
+		if (errors == null || errors.getAllErrors().isEmpty()) { return; }
+		
+		String error = errors.getFieldErrors().stream()
+												.map(fieldError -> fieldError.getField() + fieldError.getDefaultMessage())
+												.collect(Collectors.joining(","));
+		throw new ServerWebInputException(error);
 	}
 	
 }

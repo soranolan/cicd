@@ -10,6 +10,9 @@ import com.example.cicd.core.util.Argon2Utils;
 import com.example.cicd.core.util.PasetoUtils;
 import com.example.cicd.demo.helper.ISigninHandlerHelper;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Component
 public class SigninHandlerHelperImpl implements ISigninHandlerHelper {
 	
@@ -23,6 +26,7 @@ public class SigninHandlerHelperImpl implements ISigninHandlerHelper {
 		claims.put("role", exist.getRoles());
 		
 		if (isMatch) { result.put("token", PasetoUtils.compact(username, claims)); }
+		log.info("[SEARCH TAG] result >>> [{}]", () -> result);
 		return result;
 	}
 	
