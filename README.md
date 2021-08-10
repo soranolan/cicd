@@ -5,4 +5,30 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=soranolan_cicd&metric=alert_status)](https://sonarcloud.io/dashboard?id=soranolan_cicd)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=soranolan_cicd&metric=coverage)](https://sonarcloud.io/dashboard?id=soranolan_cicd)
 
-CI / CD practice
+### CI / CD practice
+## Feature
+### Finished
+* Persistence layer : Spring Data MongoDB Reactive
+* Presentation layer : Spring Webflux (Functional Endpoint)
+* Service layer : Spring
+* Database : MongoDB
+* Security : Spring Security
+* Java : 15
+* IDE : Eclipse
+* Test :  
+   * Mockito  
+   * Spring WebTestClient  
+* Property file encryption : Jasypt
+* Password encryption : Argon2
+* API Token : Paseto
+* Continuous integration : Github Action Gradle CI
+* Continuous deployment : Heroku GitHub Integration (Heroku GitHub Deploys)
+* Code quality : Github Action to Sonar Cloud
+* Notification : GitHub for Slack
+### Unfinished
+* Heroku Redis
+* Spring batch disk health
+* Code vulnerabilities SNYK
+### Failed
+* Reactive mongodb pagination
+* Logging Trace ID
