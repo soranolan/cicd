@@ -8,23 +8,37 @@
 ### CI / CD practice
 ## Feature
 ### Finished
-* Persistence layer : Spring Data MongoDB Reactive
-* Presentation layer : Spring Webflux (Functional Endpoint)
-* Service layer : Spring
-* Database : MongoDB
-* Security : Spring Security
-* Java : 15
-* IDE : Eclipse
-* Test :  
-   * Mockito  
-   * Spring WebTestClient  
-* Property file encryption : Jasypt
-* Password encryption : Argon2
-* API Token : Paseto
-* Continuous integration : Github Action Gradle CI
-* Continuous deployment : Heroku GitHub Integration (Heroku GitHub Deploys)
-* Code quality : Github Action to Sonar Cloud
-* Notification : GitHub for Slack
+* Persistence layer
+   * Spring Data MongoDB Reactive
+* Presentation layer
+   * Spring Webflux (Functional Endpoint)
+* Service layer
+   * Spring
+* Database
+   * MongoDB
+* Security
+   * Spring Security
+* Java
+   * 15
+* IDE
+   * Eclipse
+* Test
+   * Mockito
+   * Spring WebTestClient
+* Property file encryption
+   * Jasypt
+* Password encryption
+   * Argon2
+* API Token
+   * Paseto
+* Continuous integration
+   * Github Action Gradle CI
+* Continuous deployment
+   * Heroku GitHub Integration (Heroku GitHub Deploys)
+* Code quality
+   * Github Action to Sonar Cloud
+* Notification
+   * GitHub for Slack
 ### Unfinished
 * Heroku Redis
 * Spring batch disk health
