@@ -65,7 +65,7 @@ public class PasetoUtils {
 							.requireKeyId(PASETO_KEY_ID)
 							.build();
 		} catch (NoSuchAlgorithmException e) {
-			log.error("can't find algorithm " + PASETO_ALGORITHM + e.getMessage(), e);
+			log.error("can't find algorithm >>> [{}]", PASETO_ALGORITHM + e.getMessage(), e);
 		} catch (InvalidKeySpecException e) {
 			log.error(e.getMessage(), e);
 		}
@@ -83,7 +83,7 @@ public class PasetoUtils {
 															.setSubject(subject)
 															.setAudience(PASETO_AUDIENCE)
 															.setIssuedAt(now)
-															.setExpiration(now.plus(1, ChronoUnit.MINUTES))
+															.setExpiration(now.plus(15, ChronoUnit.MINUTES))
 															.setTokenId(PASETO_TOKEN_ID)
 															.setKeyId(PASETO_KEY_ID);
 		if (MapUtils.isEmpty(claims)) { return builder.compact();  }

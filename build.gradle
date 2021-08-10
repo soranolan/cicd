@@ -38,6 +38,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
 	
+	// Spring Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -65,6 +68,9 @@ dependencies {
 	implementation group: 'dev.paseto', name: 'jpaseto-api', version: '0.6.0'
 	implementation group: 'dev.paseto', name: 'jpaseto-impl', version: '0.6.0'
 	implementation group: 'dev.paseto', name: 'jpaseto-jackson', version: '0.6.0'
+	
+	// org.json
+	implementation group: 'org.json', name: 'json', version: '20210307'
 	
 }
 
