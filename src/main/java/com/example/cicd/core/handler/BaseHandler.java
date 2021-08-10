@@ -61,7 +61,7 @@ public class BaseHandler {
 	public void validate(Object body, Validator validator) {
 		Errors errors = new BeanPropertyBindingResult(body, body.getClass().getName());
 		validator.validate(body, errors);
-		if (errors == null || errors.getAllErrors().isEmpty()) { return; }
+		if (errors.getAllErrors().isEmpty()) { return; }
 		
 		String error = errors.getFieldErrors().stream()
 												.map(fieldError -> fieldError.getField() + fieldError.getDefaultMessage())
