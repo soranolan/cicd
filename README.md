@@ -30,5 +30,6 @@
 * Spring batch disk health
 * Code vulnerabilities SNYK
 ### Failed
+* Common layer
 * Reactive mongodb pagination
 * Logging Trace ID
