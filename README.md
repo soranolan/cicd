@@ -46,4 +46,5 @@
 ### Failed
 * Common layer
 * Reactive mongodb pagination
+* OAuth2 Github
 * Logging Trace ID
