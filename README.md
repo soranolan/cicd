@@ -41,7 +41,8 @@
    * GitHub for Slack
 ### Unfinished
 * Heroku Redis
-* Spring batch disk health
+* Spring batch (disk health, user data)
+* Heroku mail
 * Code vulnerabilities SNYK
 ### Failed
 * Common layer
