@@ -38,7 +38,7 @@ class TodoListHandlerTest {
 		
 		mockUser = new User();
 		mockUser.setUsername(username);
-		mockUser.setPassword("2");
+		mockUser.setPassword("1");
 		
 		List<Role> roles = new ArrayList<>();
 		roles.add(Role.ROLE_USER);

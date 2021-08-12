@@ -22,10 +22,10 @@ import org.springframework.validation.Validator;
 
 import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.service.impl.RedisServiceImpl;
 import com.example.cicd.demo.handler.SigninHandler;
 import com.example.cicd.demo.helper.impl.SigninHandlerHelperImpl;
 import com.example.cicd.demo.router.SigninRouter;
-import com.example.cicd.demo.service.impl.UserServiceImpl;
 
 import reactor.core.publisher.Mono;
 
@@ -36,7 +36,7 @@ class SigninHandlerTest {
 	private Validator validator;
 	
 	@Mock
-	private UserServiceImpl service;
+	private RedisServiceImpl redisService;
 	
 	@Mock
 	private SigninHandlerHelperImpl helper;
@@ -76,7 +76,7 @@ class SigninHandlerTest {
 		when(helper.validateCombinator(anyString(), any(User.class), any(User.class))).thenReturn(mockMap);
 		
 		Mono<User> expectFind = Mono.just(mockData);
-		when(service.findOneByUsername(anyString())).thenReturn(expectFind);
+		when(redisService.get(anyString())).thenReturn(expectFind);
 		
 		client.post().uri(DEFAULT.value() + "/signin/username")
 					.accept(APPLICATION_JSON)
