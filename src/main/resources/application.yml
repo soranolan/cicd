@@ -15,3 +15,9 @@ spring:
     restart:
       enabled: true
       exclude: static/**,templates/**
+  redis:
+    database: 0
+    host: redis-16827.c1.asia-northeast1-1.gce.cloud.redislabs.com
+    port: 16827
+    password: ENC(sQQmP/bjPsMyCavNR1RP7OrLaT/xYLUVGdliKjL6fWgbhrYs2Upk3ILvaOrIP1q7hBU9+Byajs9AFUG9EE1DDFmF9SjeMSCurg35r9198X0=)
+    
