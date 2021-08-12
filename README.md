@@ -18,6 +18,8 @@
    * MongoDB
 * Security
    * Spring Security
+* Cache
+   * Redis
 * Java
    * 15
 * IDE
@@ -40,7 +42,6 @@
 * Notification
    * GitHub for Slack
 ### Unfinished
-* Heroku Redis
 * Spring batch (disk health, user data)
 * Heroku mail
 * Code vulnerabilities SNYK
