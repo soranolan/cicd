@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.example.cicd.core.handler.BaseHandler;
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.service.IRedisService;
 import com.example.cicd.demo.service.IUserService;
 
 import lombok.extern.log4j.Log4j2;
@@ -21,17 +22,21 @@ public class SignupHandler extends BaseHandler {
 	
 	private Validator validator;
 	
-	private IUserService service;
+	private IUserService userService;
 	
-	public SignupHandler(IUserService service, Validator validator) {
-		this.service = service;
+	private IRedisService redisService;
+	
+	public SignupHandler(IUserService userService, Validator validator, IRedisService redisService) {
+		this.userService = userService;
 		this.validator = validator;
+		this.redisService = redisService;
 	}
 	
 	public Mono<ServerResponse> signUp(ServerRequest request) {
 		Mono<User> user = request.bodyToMono(User.class)
 									.doOnNext(body -> validate(body, validator))
-									.flatMap(newUser -> service.add(newUser));
+									.flatMap(newUser -> userService.add(newUser))
+									.flatMap(newUser -> redisService.set(newUser));
 		return createdResponse(user, User.class);
 	}
 	
@@ -42,7 +47,7 @@ public class SignupHandler extends BaseHandler {
 		logParams.put("username", username);
 		log.info(DEFAULT.value(), () -> logParams);
 		
-		Mono<User> user = service.findOneByUsername(username);
+		Mono<User> user = redisService.get(username).switchIfEmpty(Mono.defer(() -> userService.findOneByUsername(username)));
 		return okResponse(user, User.class);
 	}
 	

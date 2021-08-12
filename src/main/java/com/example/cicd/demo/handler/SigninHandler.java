@@ -12,6 +12,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.example.cicd.core.handler.BaseHandler;
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.service.IRedisService;
 import com.example.cicd.demo.helper.ISigninHandlerHelper;
 import com.example.cicd.demo.service.IUserService;
 
@@ -24,14 +25,17 @@ public class SigninHandler extends BaseHandler {
 	
 	private Validator validator;
 	
-	private IUserService service;
+	private IUserService userService;
 	
 	private ISigninHandlerHelper helper;
 	
-	public SigninHandler(IUserService service, ISigninHandlerHelper helper, Validator validator) {
-		this.service = service;
+	private IRedisService redisService;
+	
+	public SigninHandler(IUserService userService, ISigninHandlerHelper helper, Validator validator, IRedisService redisService) {
+		this.userService = userService;
 		this.helper = helper;
 		this.validator = validator;
+		this.redisService = redisService;
 	}
 	
 	public Mono<ServerResponse> signIn(ServerRequest request) {
@@ -41,7 +45,7 @@ public class SigninHandler extends BaseHandler {
 		logParams.put("username", username);
 		log.info(DEFAULT.value(), () -> logParams);
 		
-		Mono<User> existUser = service.findOneByUsername(username);
+		Mono<User> existUser = redisService.get(username).switchIfEmpty(Mono.defer(() -> userService.findOneByUsername(username)));
 		Mono<User> signinUser = request.bodyToMono(User.class).doOnNext(body -> validate(body, validator));
 		Mono<Map<String, Object>> valid = signinUser.zipWith(existUser, (signin, exist) -> helper.validateCombinator(username, signin, exist));
 		return okResponse(valid, Map.class);
