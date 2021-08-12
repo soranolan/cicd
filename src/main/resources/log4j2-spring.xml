@@ -6,6 +6,7 @@
 		<Property name="APP_NAME_U">CICD</Property>
 		<Property name="APP_NAME_L">cicd</Property>
 		<Property name="PATTERN">%d{yyyy/MM/dd HH:mm:ss.SSS} || %-5p || [%t] || %C.%M (%F:%L) || Detail = %m%n%throwable</Property>
+		<Property name="GLOBAL_LOG_LEVEL">INFO</Property>
 	</Properties>
 	
 	<Appenders>
@@ -48,15 +49,13 @@
 	
 	<Loggers>
 		<!-- Application -->
-<!-- 		<AsyncLogger name="com.example.cicd" level="DEBUG" additivity="false" includeLocation="true"> -->
-		<AsyncLogger name="com.example.cicd" level="INFO" additivity="false" includeLocation="true">
+		<AsyncLogger name="com.example.cicd" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
 		</AsyncLogger>
 		
-<!-- 		<AsyncLogger name="com.example.cicd.demo.service" level="DEBUG" additivity="false" includeLocation="true"> -->
-		<AsyncLogger name="com.example.cicd.demo.service" level="INFO" additivity="false" includeLocation="true">
+		<AsyncLogger name="com.example.cicd.demo.service" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
@@ -64,34 +63,32 @@
 		</AsyncLogger>
 		
 		<!-- ThirdParty -->
-<!-- 		<AsyncLogger name="org.springframework" level="DEBUG" additivity="false" includeLocation="true"> -->
-		<AsyncLogger name="org.springframework" level="INFO" additivity="false" includeLocation="true">
+		<AsyncLogger name="org.springframework" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
 		</AsyncLogger>
 		
-		<AsyncLogger name="com.ulisesbocchio.jasyptspringboot" level="INFO" additivity="false" includeLocation="true">
+		<AsyncLogger name="com.ulisesbocchio.jasyptspringboot" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
 		</AsyncLogger>
 		
-		<AsyncLogger name="org.mongodb.driver" level="INFO" additivity="false" includeLocation="true">
+		<AsyncLogger name="org.mongodb.driver" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
 			<AppenderRef ref="mongodbFile" />
 		</AsyncLogger>
 		
-<!-- 		<AsyncLogger name="reactor" level="DEBUG" additivity="false" includeLocation="true"> -->
-		<AsyncLogger name="reactor" level="INFO" additivity="false" includeLocation="true">
+		<AsyncLogger name="reactor" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
 		</AsyncLogger>
 		
-		<AsyncRoot level="INFO">
+		<AsyncRoot level="${GLOBAL_LOG_LEVEL}">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
