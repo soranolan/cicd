@@ -20,6 +20,7 @@ import org.springframework.validation.Validator;
 
 import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.service.impl.RedisServiceImpl;
 import com.example.cicd.demo.handler.SignupHandler;
 import com.example.cicd.demo.router.SignupRouter;
 import com.example.cicd.demo.service.impl.UserServiceImpl;
@@ -33,7 +34,10 @@ class SignupHandlerTest {
 	private Validator validator;
 	
 	@Mock
-	private UserServiceImpl service;
+	private UserServiceImpl userService;
+	
+	@Mock
+	private RedisServiceImpl redisService;
 	
 	@InjectMocks
 	private SignupHandler handler;
@@ -63,7 +67,8 @@ class SignupHandlerTest {
 	@Test
 	void test_signUp() {
 		Mono<User> expect = Mono.just(mockData);
-		when(service.add(any(User.class))).thenReturn(expect);
+		when(userService.add(any(User.class))).thenReturn(expect);
+		when(redisService.set(any(User.class))).thenReturn(expect);
 		
 		client.post().uri(DEFAULT.value() + "/signup")
 					.accept(APPLICATION_JSON)
@@ -78,7 +83,7 @@ class SignupHandlerTest {
 	@Test
 	void test_checkUsername() {
 		Mono<User> expect = Mono.just(mockData);
-		when(service.findOneByUsername(anyString())).thenReturn(expect);
+		when(redisService.get(anyString())).thenReturn(expect);
 		
 		client.get().uri(DEFAULT.value() + "/signup/username")
 					.accept(APPLICATION_JSON)

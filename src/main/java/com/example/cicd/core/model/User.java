@@ -15,11 +15,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.misc.CustomAuthorityDeserializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.Getter;
 import lombok.Setter;
 
+@JsonIgnoreProperties({ "accountNonExpired", "accountNonLocked", "credentialsNonExpired"  })
 @Getter
 @Setter
 @Document(collection = "User")

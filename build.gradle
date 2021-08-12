@@ -41,6 +41,9 @@ dependencies {
 	// Spring Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	
+	// Spring Redis Reactive
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+	
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
