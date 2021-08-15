@@ -63,6 +63,7 @@ dependencies {
 	// Apache Commons
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 	implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
 	
 	// Argon2 dependency
 	implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
