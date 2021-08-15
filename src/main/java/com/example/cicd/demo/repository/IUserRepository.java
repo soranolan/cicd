@@ -1,9 +1,8 @@
 package com.example.cicd.demo.repository;
 
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.repository.IBaseRepository;
 
-public interface IUserRepository extends ReactiveMongoRepository<User, String> {
+public interface IUserRepository extends IBaseRepository<User> {
 
 }
