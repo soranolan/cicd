@@ -20,6 +20,8 @@
    * Spring Security
 * Cache
    * Redis
+* Job
+   * Health detect
 * Java
    * 15
 * IDE
@@ -42,11 +44,9 @@
 * Notification
    * GitHub for Slack
 ### Unfinished
-* Spring batch (disk health, user data)
 * Heroku mail
 * Code vulnerabilities SNYK
 ### Failed
-* Common layer
 * Reactive mongodb pagination
 * OAuth2 Github
 * Logging Trace ID
