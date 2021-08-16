@@ -9,6 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.service.impl.BaseServiceImpl;
 import com.example.cicd.core.util.Argon2Utils;
 import com.example.cicd.core.util.DateUtils;
 import com.example.cicd.demo.repository.IUserRepository;
@@ -19,11 +20,12 @@ import reactor.core.publisher.Mono;
 
 @Log4j2
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService {
 	
 	private IUserRepository repository;
 	
 	public UserServiceImpl(IUserRepository repository) {
+		super(repository);
 		this.repository = repository;
 	}
 	
