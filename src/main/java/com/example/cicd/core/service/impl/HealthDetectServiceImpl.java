@@ -51,7 +51,7 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			// test for async lock >>> try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock add sleep 1s
 			diskFairLock.unlock();
 			log.debug(DEFAULT.value(), () -> UNLOCK.value());
 		}
@@ -77,7 +77,7 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			// test for async lock >>> try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock add sleep 1s
 			heapMemoryFairLock.unlock();
 			log.debug(DEFAULT.value(), () -> UNLOCK.value());
 		}
@@ -111,7 +111,7 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			// test for async lock >>> try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock add sleep 1s
 			threadFairLock.unlock();
 			log.debug(DEFAULT.value(), () -> UNLOCK.value());
 		}
