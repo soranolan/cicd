@@ -8,6 +8,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,11 +52,11 @@ class RedisServiceTest {
 	void test_set() {
 		when(template.opsForValue()).thenReturn(operations);
 		Mono<Boolean> expect = Mono.just(true);
-		when(operations.set(anyString(), any(User.class))).thenReturn(expect);
+		when(operations.set(anyString(), any(User.class), any(Duration.class))).thenReturn(expect);
 		Mono<User> test = service.set(mockData);
 		
 		assertThat(test).isNotNull();
-		verify(operations, times(1)).set(anyString(), any(User.class));
+		verify(operations, times(1)).set(anyString(), any(User.class), any(Duration.class));
 		verifyNoMoreInteractions(operations);
 		verifyNoMoreInteractions(template);
 	}

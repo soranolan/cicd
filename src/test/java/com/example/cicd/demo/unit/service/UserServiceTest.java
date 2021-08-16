@@ -21,6 +21,7 @@ import com.example.cicd.demo.repository.IUserRepository;
 import com.example.cicd.demo.service.impl.UserServiceImpl;
 
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -60,9 +61,12 @@ class UserServiceTest {
 		when(repository.insert(any(User.class))).thenReturn(expect);
 		Mono<User> test = service.add(mockData);
 		
+		StepVerifier.create(test)
+					.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
+					.expectComplete()
+					.verify();
+		
 		assertThat(test).isNotNull().isEqualTo(expect);
-		assertThat(test.block().getCreatedAt()).isNotNull();
-		assertThat(test.block().getUpdatedAt()).isNotNull();
 		verify(repository, times(1)).insert(any(User.class));
 	}
 	
@@ -74,9 +78,12 @@ class UserServiceTest {
 		when(repository.insert(any(User.class))).thenReturn(expect);
 		Mono<User> test = service.add(mockData);
 		
+		StepVerifier.create(test)
+					.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
+					.expectComplete()
+					.verify();
+		
 		assertThat(test).isNotNull().isEqualTo(expect);
-		assertThat(test.block().getCreatedAt()).isNotNull();
-		assertThat(test.block().getUpdatedAt()).isNotNull();
 		verify(repository, times(1)).insert(any(User.class));
 	}
 	

@@ -5,7 +5,7 @@
 		<Property name="BASE_DIR">/deployments/applogs</Property>
 		<Property name="APP_NAME_U">CICD</Property>
 		<Property name="APP_NAME_L">cicd</Property>
-		<Property name="PATTERN">%d{yyyy/MM/dd HH:mm:ss.SSS} || %-5p || [%t] || %C.%M (%F:%L) || Detail = %m%n%throwable</Property>
+		<Property name="PATTERN">%d{yyyy/MM/dd HH:mm:ss.SSS} || %-5p || [%-40t] || %logger.%M (%F:%L) || Detail = %m%n%throwable</Property>
 		<Property name="GLOBAL_LOG_LEVEL">INFO</Property>
 	</Properties>
 	
@@ -45,16 +45,26 @@
 				<SizeBasedTriggeringPolicy size="10 MB" />
 			</Policies>
 		</RollingFile>
+		
+		<RollingFile name="jobFile" fileName="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_job.log" filePattern="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_job_%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="healthFile" fileName="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_health.log" filePattern="${BASE_DIR}/${APP_NAME_L}/${APP_NAME_U}_health_%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
 	</Appenders>
 	
 	<Loggers>
-		<!-- Application -->
-		<AsyncLogger name="com.example.cicd" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
-			<AppenderRef ref="console" />
-			<AppenderRef ref="defaultFile" />
-			<AppenderRef ref="errorFile" level="ERROR" />
-		</AsyncLogger>
-		
+		<!-- Application APP -->
 		<AsyncLogger name="com.example.cicd.demo.service" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
@@ -62,14 +72,47 @@
 			<AppenderRef ref="serviceFile" />
 		</AsyncLogger>
 		
+		<!-- Application Core -->
+		<AsyncLogger name="com.example.cicd.core.job" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+			<AppenderRef ref="jobFile" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="com.example.cicd.core.service.impl.HealthDetectServiceImpl" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+			<AppenderRef ref="healthFile" />
+		</AsyncLogger>
+		
 		<!-- ThirdParty -->
-		<AsyncLogger name="org.springframework" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
+		<AsyncLogger name="org" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
 		</AsyncLogger>
 		
-		<AsyncLogger name="com.ulisesbocchio.jasyptspringboot" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
+		<AsyncLogger name="_org" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="com" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="reactor" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="defaultFile" />
+			<AppenderRef ref="errorFile" level="ERROR" />
+		</AsyncLogger>
+		
+		<AsyncLogger name="io" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
 			<AppenderRef ref="console" />
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
@@ -80,12 +123,6 @@
 			<AppenderRef ref="defaultFile" />
 			<AppenderRef ref="errorFile" level="ERROR" />
 			<AppenderRef ref="mongodbFile" />
-		</AsyncLogger>
-		
-		<AsyncLogger name="reactor" level="${GLOBAL_LOG_LEVEL}" additivity="false" includeLocation="true">
-			<AppenderRef ref="console" />
-			<AppenderRef ref="defaultFile" />
-			<AppenderRef ref="errorFile" level="ERROR" />
 		</AsyncLogger>
 		
 		<AsyncRoot level="${GLOBAL_LOG_LEVEL}">

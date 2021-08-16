@@ -45,7 +45,7 @@ public class SigninHandler extends BaseHandler {
 		logParams.put("username", username);
 		log.info(DEFAULT.value(), () -> logParams);
 		
-		Mono<User> existUser = redisService.get(username).switchIfEmpty(Mono.defer(() -> userService.findOneByUsername(username)));
+		Mono<User> existUser = redisService.get(username).switchIfEmpty(Mono.defer(() -> userService.findOneByUsername(username).flatMap(user -> redisService.set(user))));
 		Mono<User> signinUser = request.bodyToMono(User.class).doOnNext(body -> validate(body, validator));
 		Mono<Map<String, Object>> valid = signinUser.zipWith(existUser, (signin, exist) -> helper.validateCombinator(username, signin, exist));
 		return okResponse(valid, Map.class);

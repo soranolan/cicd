@@ -27,6 +27,7 @@ import com.example.cicd.demo.service.impl.TodoListServiceImpl;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
 class TodoListServiceTest {
@@ -86,9 +87,12 @@ class TodoListServiceTest {
 		when(repository.insert(any(TodoList.class))).thenReturn(expect);
 		Mono<TodoList> test = service.add(mockData);
 		
+		StepVerifier.create(test)
+					.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
+					.expectComplete()
+					.verify();
+		
 		assertThat(test).isNotNull().isEqualTo(expect);
-		assertThat(test.block().getCreatedAt()).isNotNull();
-		assertThat(test.block().getUpdatedAt()).isNotNull();
 		verify(repository, times(1)).insert(any(TodoList.class));
 		verifyNoMoreInteractions(repository, helper);
 	}
@@ -101,9 +105,12 @@ class TodoListServiceTest {
 		when(repository.insert(any(TodoList.class))).thenReturn(expect);
 		Mono<TodoList> test = service.add(mockData);
 		
+		StepVerifier.create(test)
+					.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
+					.expectComplete()
+					.verify();
+		
 		assertThat(test).isNotNull().isEqualTo(expect);
-		assertThat(test.block().getCreatedAt()).isNotNull();
-		assertThat(test.block().getUpdatedAt()).isNotNull();
 		verify(repository, times(1)).insert(any(TodoList.class));
 		verifyNoMoreInteractions(repository, helper);
 	}
