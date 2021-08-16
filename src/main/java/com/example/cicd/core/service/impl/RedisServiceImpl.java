@@ -2,6 +2,8 @@ package com.example.cicd.core.service.impl;
 
 import static com.example.cicd.core.enums.LogStatement.DEFAULT;
 
+import java.time.Duration;
+
 import org.json.JSONObject;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,7 @@ public class RedisServiceImpl implements IRedisService {
 		JSONObject logParams = new JSONObject();
 		logParams.put("user", user);
 		log.info(DEFAULT.value(), () -> logParams);
-		
-		return template.opsForValue().set(user.getUsername(), user).flatMap(bool -> Mono.just(user));
+		return template.opsForValue().set(user.getUsername(), user, Duration.ofDays(1L)).flatMap(bool -> Mono.just(user));
 	}
 	
 	@Override
