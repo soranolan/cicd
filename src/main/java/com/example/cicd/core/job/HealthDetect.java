@@ -16,16 +16,16 @@ import lombok.extern.log4j.Log4j2;
 public class HealthDetect {
 	
 	@Autowired
-	IHealthDetectService service;
+	private IHealthDetectService service;
 	
 	@Async("taskExecutor")
 	@Scheduled(cron = "0 0 23 * * ?")
 	public void execute() {
-		log.info(DEFAULT.value(), () -> "main start");
+		log.info(DEFAULT.value(), () -> "Health detect main start");
 		service.disk();
 		service.heapMemory();
 		service.thread();
-		log.info(DEFAULT.value(), () -> "main end");
+		log.info(DEFAULT.value(), () -> "Health detect  main end");
 	}
 	
 }
