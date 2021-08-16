@@ -7,7 +7,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryUsage;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.io.FileUtils;
@@ -49,7 +48,8 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock
+//			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
 			diskFairLock.unlock();
 			log.debug(DEFAULT.value(), () -> "unlock end");
 		}
@@ -75,7 +75,8 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock
+//			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
 			heapMemoryFairLock.unlock();
 			log.debug(DEFAULT.value(), () -> "unlock end");
 		}
@@ -109,7 +110,8 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock
+//			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
 			threadFairLock.unlock();
 			log.debug(DEFAULT.value(), () -> "unlock end");
 		}
