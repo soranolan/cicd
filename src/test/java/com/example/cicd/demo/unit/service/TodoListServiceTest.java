@@ -9,6 +9,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static reactor.test.StepVerifier.create;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,6 @@ import com.example.cicd.demo.service.impl.TodoListServiceImpl;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
 class TodoListServiceTest {
@@ -87,10 +87,10 @@ class TodoListServiceTest {
 		when(repository.insert(any(TodoList.class))).thenReturn(expect);
 		Mono<TodoList> test = service.add(mockData);
 		
-		StepVerifier.create(test)
-					.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
-					.expectComplete()
-					.verify();
+		create(test)
+			.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
+			.expectComplete()
+			.verify();
 		
 		assertThat(test).isNotNull().isEqualTo(expect);
 		verify(repository, times(1)).insert(any(TodoList.class));
@@ -105,10 +105,10 @@ class TodoListServiceTest {
 		when(repository.insert(any(TodoList.class))).thenReturn(expect);
 		Mono<TodoList> test = service.add(mockData);
 		
-		StepVerifier.create(test)
-					.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
-					.expectComplete()
-					.verify();
+		create(test)
+			.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
+			.expectComplete()
+			.verify();
 		
 		assertThat(test).isNotNull().isEqualTo(expect);
 		verify(repository, times(1)).insert(any(TodoList.class));

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static reactor.test.StepVerifier.create;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,6 @@ import com.example.cicd.demo.repository.IUserRepository;
 import com.example.cicd.demo.service.impl.UserServiceImpl;
 
 import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -61,10 +61,10 @@ class UserServiceTest {
 		when(repository.insert(any(User.class))).thenReturn(expect);
 		Mono<User> test = service.add(mockData);
 		
-		StepVerifier.create(test)
-					.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
-					.expectComplete()
-					.verify();
+		create(test)
+			.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
+			.expectComplete()
+			.verify();
 		
 		assertThat(test).isNotNull().isEqualTo(expect);
 		verify(repository, times(1)).insert(any(User.class));
@@ -78,10 +78,10 @@ class UserServiceTest {
 		when(repository.insert(any(User.class))).thenReturn(expect);
 		Mono<User> test = service.add(mockData);
 		
-		StepVerifier.create(test)
-					.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
-					.expectComplete()
-					.verify();
+		create(test)
+			.expectNextMatches(response -> (response.getCreatedAt() != null) && (response.getUpdatedAt() != null))
+			.expectComplete()
+			.verify();
 		
 		assertThat(test).isNotNull().isEqualTo(expect);
 		verify(repository, times(1)).insert(any(User.class));
