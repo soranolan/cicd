@@ -1,5 +1,8 @@
 package com.example.cicd.core.unit.job;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,6 +24,9 @@ class HealthDetectTest {
 	@Test
 	void test_execute() {
 		detect.execute();
+		verify(service, times(1)).disk();
+		verify(service, times(1)).heapMemory();
+		verify(service, times(1)).thread();
 	}
 	
 }
