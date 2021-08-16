@@ -1,6 +1,9 @@
 package com.example.cicd.core.service.impl;
 
 import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+import static com.example.cicd.core.enums.LogStatement.LOCK;
+import static com.example.cicd.core.enums.LogStatement.SKIP;
+import static com.example.cicd.core.enums.LogStatement.UNLOCK;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -31,11 +34,11 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 	@Override
 	public void disk() {
 		if (!diskFairLock.tryLock()) {
-			log.debug(DEFAULT.value(), () -> "skip");
+			log.debug(DEFAULT.value(), () -> SKIP.value());
 			return;
 		}
 		try {
-			log.debug(DEFAULT.value(), () -> "lock start");
+			log.debug(DEFAULT.value(), () -> LOCK.value());
 			JSONObject logParams = new JSONObject();
 			File root = new File("/");
 			long free = root.getFreeSpace();
@@ -48,21 +51,20 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			// test for async lock
-//			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock >>> try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
 			diskFairLock.unlock();
-			log.debug(DEFAULT.value(), () -> "unlock end");
+			log.debug(DEFAULT.value(), () -> UNLOCK.value());
 		}
 	}
 	
 	@Override
 	public void heapMemory() {
 		if (!heapMemoryFairLock.tryLock()) {
-			log.debug(DEFAULT.value(), () -> "skip");
+			log.debug(DEFAULT.value(), () -> SKIP.value());
 			return;
 		}
 		try {
-			log.debug(DEFAULT.value(), () -> "lock start");
+			log.debug(DEFAULT.value(), () -> LOCK.value());
 			JSONObject logParams = new JSONObject();
 			MemoryUsage heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
 			long committed = heapMemoryUsage.getCommitted();
@@ -75,21 +77,20 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			// test for async lock
-//			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock >>> try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
 			heapMemoryFairLock.unlock();
-			log.debug(DEFAULT.value(), () -> "unlock end");
+			log.debug(DEFAULT.value(), () -> UNLOCK.value());
 		}
 	}
 	
 	@Override
 	public void thread() {
 		if (!threadFairLock.tryLock()) {
-			log.debug(DEFAULT.value(), () -> "skip");
+			log.debug(DEFAULT.value(), () -> SKIP.value());
 			return;
 		}
 		try {
-			log.debug(DEFAULT.value(), () -> "lock start");
+			log.debug(DEFAULT.value(), () -> LOCK.value());
 			JSONObject logParams = new JSONObject();
 			ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
 			logParams.put("Thread Count : ", threadMXBean.getThreadCount());
@@ -110,10 +111,9 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			// test for async lock
-//			try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
+			// test for async lock >>> try { TimeUnit.SECONDS.sleep(1L); } catch (InterruptedException e) { e.printStackTrace(); }
 			threadFairLock.unlock();
-			log.debug(DEFAULT.value(), () -> "unlock end");
+			log.debug(DEFAULT.value(), () -> UNLOCK.value());
 		}
 	}
 	

@@ -2,7 +2,13 @@ package com.example.cicd.core.enums;
 
 public enum LogStatement {
 	
-	DEFAULT("[SEARCH_TAG] logParams >>> [{}]");
+	DEFAULT("[SEARCH_TAG] logParams >>> [{}]"),
+	
+	LOCK("lock"),
+	
+	UNLOCK("unlock"),
+	
+	SKIP("skip");
 	
 	private final String value;
 	
