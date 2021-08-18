@@ -61,7 +61,7 @@ class SigninHandlerTest {
 		mockData.setId("mockId");
 		mockData.setUsername("username");
 		mockData.setPassword("password");
-		mockData.setEnabled(true);
+		mockData.setIsActivated("true");
 		
 		List<Role> roles = new ArrayList<>();
 		roles.add(Role.ROLE_USER);

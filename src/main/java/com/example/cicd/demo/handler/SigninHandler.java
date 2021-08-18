@@ -1,6 +1,7 @@
 package com.example.cicd.demo.handler;
 
 import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 
 import java.util.Map;
 
@@ -45,7 +46,9 @@ public class SigninHandler extends BaseHandler {
 		logParams.put("username", username);
 		log.info(DEFAULT.value(), () -> logParams);
 		
-		Mono<User> existUser = redisService.get(username).switchIfEmpty(Mono.defer(() -> userService.findOneByUsername(username).flatMap(user -> redisService.set(user))));
+		Mono<User> existUser = redisService.get(username)
+											.filter(user -> equalsIgnoreCase(user.getIsActivated(), "true"))
+											.switchIfEmpty(Mono.defer(() -> userService.findOneByUsername(username, "true").flatMap(user -> redisService.set(user))));
 		Mono<User> signinUser = request.bodyToMono(User.class).doOnNext(body -> validate(body, validator));
 		Mono<Map<String, Object>> valid = signinUser.zipWith(existUser, (signin, exist) -> helper.validateCombinator(username, signin, exist));
 		return okResponse(valid, Map.class);
