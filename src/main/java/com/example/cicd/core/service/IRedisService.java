@@ -10,4 +10,6 @@ public interface IRedisService {
 	
 	public Mono<User> get(String key);
 	
+	public Mono<User> activate(User entity);
+	
 }
