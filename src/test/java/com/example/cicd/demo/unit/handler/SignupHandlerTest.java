@@ -20,6 +20,7 @@ import org.springframework.validation.Validator;
 
 import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.service.impl.EMailServiceImpl;
 import com.example.cicd.core.service.impl.RedisServiceImpl;
 import com.example.cicd.demo.handler.SignupHandler;
 import com.example.cicd.demo.router.SignupRouter;
@@ -38,6 +39,9 @@ class SignupHandlerTest {
 	
 	@Mock
 	private RedisServiceImpl redisService;
+	
+	@Mock
+	private EMailServiceImpl emailService;
 	
 	@InjectMocks
 	private SignupHandler handler;
