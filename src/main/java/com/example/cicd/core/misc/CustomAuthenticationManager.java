@@ -25,7 +25,7 @@ public class CustomAuthenticationManager implements ReactiveAuthenticationManage
 				.filter(valid -> valid)
 				.switchIfEmpty(Mono.empty())
 				.map(valid -> {
-					Claims claims = PasetoUtils.parse(token).getClaims();
+					Claims claims = PasetoUtils.getClaims(token);
 					String username = claims.getSubject();
 					List<String> roles = claims.get("role", List.class);
 					return new UsernamePasswordAuthenticationToken(username, null, roles.stream()
