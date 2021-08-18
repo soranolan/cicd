@@ -1,0 +1,38 @@
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
+spring:
+  profiles: production
+  data:
+    mongodb:
+      password: ENC(CTwEVPTP0gibe8QmB6u230tMYcQnB2+vwJAW18vebBo3lUpMxgVDSF2+ECBC6JsQZpewFD7e/HyXyULQQpuT+g==)
+      uri: mongodb+srv://mongo:${spring.data.mongodb.password}@cluster0.pctgu.mongodb.net/Practice?retryWrites=true&w=majority
+  devtools:
+    restart:
+      enabled: true
+      exclude: static/**,templates/**
+  redis:
+    database: 0
+    host: redis-16827.c1.asia-northeast1-1.gce.cloud.redislabs.com
+    port: 16827
+    password: ENC(sQQmP/bjPsMyCavNR1RP7OrLaT/xYLUVGdliKjL6fWgbhrYs2Upk3ILvaOrIP1q7hBU9+Byajs9AFUG9EE1DDFmF9SjeMSCurg35r9198X0=)
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ENC(ytvFAAM2mWrWmVMmc3oLqt0b2r9pUQ980mBl3ti4sr8QTn642yKRgLIK94kouK53qcF3tapVromB8bNjpHELbA==)
+    password: ENC(GFwB79w/yBqUgXa/m/1K0BLdz2rD7N7mgyOUYmVXkqHeXOPzOUXpPXse4CfZIK0F2eiXTlFW02Qy5kXYzlJUow==)
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+custom:
+  activate:
+    link: https://vue-ci-cd-practice.herokuapp.com/F01004/
