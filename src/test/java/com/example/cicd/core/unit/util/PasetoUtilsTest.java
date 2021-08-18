@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.cicd.core.util.PasetoUtils;
 
-import dev.paseto.jpaseto.Paseto;
+import dev.paseto.jpaseto.Claims;
 
 @ExtendWith(MockitoExtension.class)
 class PasetoUtilsTest {
@@ -66,7 +66,7 @@ class PasetoUtilsTest {
 	@Test
 	void test_parse() {
 		String token = PasetoUtils.compact(subject);
-		Paseto test = PasetoUtils.parse(token);
+		Claims test = PasetoUtils.getClaims(token);
 		assertThat(test).isNotNull();
 	}
 	

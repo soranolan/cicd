@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.collections4.MapUtils;
 
-import dev.paseto.jpaseto.Paseto;
+import dev.paseto.jpaseto.Claims;
 import dev.paseto.jpaseto.PasetoParser;
 import dev.paseto.jpaseto.PasetoV2PublicBuilder;
 import dev.paseto.jpaseto.Pasetos;
@@ -101,8 +101,8 @@ public class PasetoUtils {
 		return false;
 	}
 	
-	public static Paseto parse(String token) {
-		return parser.parse(token);
+	public static Claims getClaims(String token) {
+		return parser.parse(token).getClaims();
 	}
 	
 	public static void writerKeyToFile(String filePath) throws IOException {
