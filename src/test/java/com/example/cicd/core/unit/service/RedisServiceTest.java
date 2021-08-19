@@ -74,4 +74,28 @@ class RedisServiceTest {
 		verifyNoMoreInteractions(template);
 	}
 	
+	@Test
+	void test_activate_system_message_empty() {
+		when(template.opsForValue()).thenReturn(operations);
+		Mono<Boolean> expect = Mono.just(true);
+		when(operations.set(anyString(), any(User.class), any(Duration.class))).thenReturn(expect);
+		Mono<User> test = service.activate(mockData);
+		
+		assertThat(test).isNotNull();
+		verify(operations, times(1)).set(anyString(), any(User.class), any(Duration.class));
+		verifyNoMoreInteractions(operations);
+		verifyNoMoreInteractions(template);
+	}
+	
+	@Test
+	void test_activate_system_message_not_empty() {
+		mockData.setSystemMessage("message");
+		Mono<User> test = service.activate(mockData);
+		
+		assertThat(test).isNotNull();
+		verify(operations, times(0)).set(anyString(), any(User.class), any(Duration.class));
+		verifyNoMoreInteractions(operations);
+		verifyNoMoreInteractions(template);
+	}
+	
 }

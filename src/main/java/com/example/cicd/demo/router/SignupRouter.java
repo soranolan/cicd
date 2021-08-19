@@ -21,7 +21,9 @@ public class SignupRouter {
 	public RouterFunction<ServerResponse> signupRoute(SignupHandler handler) {
 		return RouterFunctions
 				.route(POST(DEFAULT.value() + "/signup").and(accept(APPLICATION_JSON)), handler::signUp)
-				.andRoute(GET(DEFAULT.value() + "/signup/{username}").and(accept(APPLICATION_JSON)), handler::checkUsername);
+				.andRoute(GET(DEFAULT.value() + "/signup/{username}").and(accept(APPLICATION_JSON)), handler::checkUsername)
+				.andRoute(POST(DEFAULT.value() + "/signup/activate").and(accept(APPLICATION_JSON)), handler::activate)
+				.andRoute(POST(DEFAULT.value() + "/signup/reactivate").and(accept(APPLICATION_JSON)), handler::reactivate);
 	}
 	
 }

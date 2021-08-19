@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 
-@JsonIgnoreProperties({ "accountNonExpired", "accountNonLocked", "credentialsNonExpired"  })
+@JsonIgnoreProperties({ "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled" })
 @Getter
 @Setter
 @Document(collection = "User")
@@ -37,6 +37,12 @@ public class User extends BaseDocument implements UserDetails {
 	@NotNull
 	@Size(min = 1, max = 24)
 	private String password;
+	
+	private String email;
+	
+	private String isActivated;
+	
+	private String systemMessage;
 	
 	private boolean enabled;
 	
@@ -72,7 +78,7 @@ public class User extends BaseDocument implements UserDetails {
 	
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", enabled=" + enabled + ", roles=" + roles + 
+		return "User [username=" + username + ", isActivated=" + isActivated + ", roles=" + roles + 
 				", super.toString()=" + super.toString() + "]";
 	}
 	
