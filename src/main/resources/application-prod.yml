@@ -7,7 +7,6 @@ jasypt:
     password: ${JASYPT_ENCRYPTOR_PASSWORD}
 
 spring:
-  profiles: production
   data:
     mongodb:
       password: ENC(CTwEVPTP0gibe8QmB6u230tMYcQnB2+vwJAW18vebBo3lUpMxgVDSF2+ECBC6JsQZpewFD7e/HyXyULQQpuT+g==)
