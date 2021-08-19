@@ -21,7 +21,9 @@
 * Cache
    * Redis
 * Job
-   * Health detect
+   * Spring Scheduled
+* Mail
+   * Spring Mail
 * Java
    * 15
 * IDE
@@ -45,7 +47,6 @@
 * Notification
    * GitHub for Slack
 ### Unfinished
-* Heroku mail
 * Code vulnerabilities SNYK
 ### Failed
 * Reactive mongodb pagination
