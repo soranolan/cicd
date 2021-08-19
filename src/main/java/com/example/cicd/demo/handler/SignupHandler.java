@@ -71,7 +71,7 @@ public class SignupHandler extends BaseHandler {
 	public Mono<ServerResponse> reactivate(ServerRequest request) {
 		ParameterizedTypeReference<Map<String, Object>> typeReference = new ParameterizedTypeReference<Map<String, Object>>(){};
 		Mono<User> mono = request.bodyToMono(typeReference)
-									.flatMap(user -> userService.reactivate(user))
+									.flatMap(entry -> userService.reactivate(entry))
 									.doOnNext(user -> emailService.sendActivateLink(user));
 		return okResponse(mono, User.class);
 	}
