@@ -7,6 +7,7 @@ jasypt:
     password: ${JASYPT_ENCRYPTOR_PASSWORD}
 
 spring:
+  profiles: production
   data:
     mongodb:
       password: ENC(CTwEVPTP0gibe8QmB6u230tMYcQnB2+vwJAW18vebBo3lUpMxgVDSF2+ECBC6JsQZpewFD7e/HyXyULQQpuT+g==)
@@ -25,7 +26,8 @@ spring:
     port: 587
     username: ENC(ytvFAAM2mWrWmVMmc3oLqt0b2r9pUQ980mBl3ti4sr8QTn642yKRgLIK94kouK53qcF3tapVromB8bNjpHELbA==)
     password: ENC(GFwB79w/yBqUgXa/m/1K0BLdz2rD7N7mgyOUYmVXkqHeXOPzOUXpPXse4CfZIK0F2eiXTlFW02Qy5kXYzlJUow==)
-    properties:      mail:
+    properties:
+      mail:
         smtp:
           auth: true
           starttls:
@@ -33,4 +35,4 @@ spring:
 
 custom:
   activate:
-    link: http://localhost:8081/F01004/
+    link: https://vue-ci-cd-practice.herokuapp.com/F01004/

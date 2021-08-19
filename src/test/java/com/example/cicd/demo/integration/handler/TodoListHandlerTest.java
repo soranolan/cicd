@@ -33,12 +33,12 @@ class TodoListHandlerTest {
 	
 	@BeforeEach
 	void setup() {
-		username = "1";
+		username = "test";
 		creator = "id001";
 		
 		mockUser = new User();
 		mockUser.setUsername(username);
-		mockUser.setPassword("1");
+		mockUser.setPassword("test");
 		
 		List<Role> roles = new ArrayList<>();
 		roles.add(Role.ROLE_USER);

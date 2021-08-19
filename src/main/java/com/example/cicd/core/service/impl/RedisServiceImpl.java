@@ -4,6 +4,7 @@ import static com.example.cicd.core.enums.LogStatement.DEFAULT;
 
 import java.time.Duration;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class RedisServiceImpl implements IRedisService {
 		JSONObject logParams = new JSONObject();
 		logParams.put("user", user);
 		log.info(DEFAULT.value(), () -> logParams);
-		return template.opsForValue().set(user.getUsername(), user, Duration.ofDays(1L)).flatMap(bool -> Mono.just(user));
+		return template.opsForValue().set(user.getUsername(), user, Duration.ofMinutes(15L)).flatMap(bool -> Mono.just(user));
 	}
 	
 	@Override
@@ -37,8 +38,19 @@ public class RedisServiceImpl implements IRedisService {
 		JSONObject logParams = new JSONObject();
 		logParams.put("key", key);
 		log.info(DEFAULT.value(), () -> logParams);
-		
 		return template.opsForValue().get(key);
+	}
+	
+	@Override
+	public Mono<User> activate(User entity) {
+		JSONObject logParams = new JSONObject();
+		logParams.put("entity", entity);
+		log.info(DEFAULT.value(), () -> logParams);
+		
+		if (StringUtils.isBlank(entity.getSystemMessage())) {
+			return set(entity);
+		}
+		return Mono.just(entity);
 	}
 	
 }

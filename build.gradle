@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-	// Spring MongoDB Reactive
+	// Spring MongoDB Reactive (https://www.mongodb.com/cloud)
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 	
 	// Spring Webflux
@@ -41,8 +41,11 @@ dependencies {
 	// Spring Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	
-	// Spring Redis Reactive
+	// Spring Redis Reactive (https://redis.com/)
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+	
+	// Spring Mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
