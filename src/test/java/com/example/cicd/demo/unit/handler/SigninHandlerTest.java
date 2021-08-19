@@ -26,6 +26,7 @@ import com.example.cicd.core.service.impl.RedisServiceImpl;
 import com.example.cicd.demo.handler.SigninHandler;
 import com.example.cicd.demo.helper.impl.SigninHandlerHelperImpl;
 import com.example.cicd.demo.router.SigninRouter;
+import com.example.cicd.demo.service.impl.UserServiceImpl;
 
 import reactor.core.publisher.Mono;
 
@@ -37,6 +38,9 @@ class SigninHandlerTest {
 	
 	@Mock
 	private RedisServiceImpl redisService;
+	
+	@Mock
+	private UserServiceImpl userService;
 	
 	@Mock
 	private SigninHandlerHelperImpl helper;
@@ -72,7 +76,7 @@ class SigninHandlerTest {
 	}
 	
 	@Test
-	void test_signIn() {
+	void test_signIn_activate_true() {
 		when(helper.validateCombinator(anyString(), any(User.class), any(User.class))).thenReturn(mockMap);
 		
 		Mono<User> expectFind = Mono.just(mockData);
@@ -86,6 +90,26 @@ class SigninHandlerTest {
 					.expectHeader().contentType(APPLICATION_JSON)
 					.expectBodyList(Map.class)
 					.hasSize(1);
+	}
+	
+	@Test
+	void test_signIn_activate_false() {
+		when(helper.validateCombinator(anyString(), any(User.class), any(User.class))).thenReturn(mockMap);
+		
+		mockData.setIsActivated("false");
+		Mono<User> expectFind = Mono.just(mockData);
+		when(redisService.get(anyString())).thenReturn(expectFind);
+		when(userService.findOneByUsername(anyString(), anyString())).thenReturn(expectFind);
+		when(redisService.set(any(User.class))).thenReturn(expectFind);
+		
+		client.post().uri(DEFAULT.value() + "/signin/username")
+						.accept(APPLICATION_JSON)
+						.bodyValue(mockData)
+						.exchange()
+						.expectStatus().isOk()
+						.expectHeader().contentType(APPLICATION_JSON)
+						.expectBodyList(Map.class)
+						.hasSize(1);
 	}
 	
 }
