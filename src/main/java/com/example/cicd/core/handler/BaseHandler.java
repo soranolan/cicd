@@ -1,11 +1,10 @@
 package com.example.cicd.core.handler;
 
+import static java.util.stream.Collectors.joining;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
-
-import java.util.stream.Collectors;
 
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
@@ -58,6 +57,12 @@ public class BaseHandler {
 		return ServerResponse.notFound().build();
 	}
 	
+	/**
+	 * common validate method
+	 * 
+	 * @param body request entity
+	 * @param validator validator
+	 */
 	public void validate(Object body, Validator validator) {
 		Errors errors = new BeanPropertyBindingResult(body, body.getClass().getName());
 		validator.validate(body, errors);
@@ -65,7 +70,7 @@ public class BaseHandler {
 		
 		String error = errors.getFieldErrors().stream()
 												.map(fieldError -> fieldError.getField() + fieldError.getDefaultMessage())
-												.collect(Collectors.joining(","));
+												.collect(joining(","));
 		throw new ServerWebInputException(error);
 	}
 	

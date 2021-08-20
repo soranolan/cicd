@@ -2,6 +2,7 @@ package com.example.cicd.core.filter;
 
 import static com.example.cicd.core.enums.LogStatement.DEFAULT;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
 import org.json.JSONObject;
@@ -25,8 +26,9 @@ public class RequestLoggingFilter implements WebFilter {
 		
 		JSONObject logParams = new JSONObject();
 		if (remoteAddress != null) {
-			logParams.put("HostAddress", remoteAddress.getAddress().getHostAddress());
-			logParams.put("HostName", remoteAddress.getAddress().getHostName());
+			InetAddress address = remoteAddress.getAddress();
+			logParams.put("HostAddress", address.getHostAddress());
+			logParams.put("HostName", address.getHostName());
 			logParams.put("Port", remoteAddress.getPort());
 		}
 		logParams.put("Method", request.getMethod());

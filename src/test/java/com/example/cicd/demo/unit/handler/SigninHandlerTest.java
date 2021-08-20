@@ -1,6 +1,7 @@
 package com.example.cicd.demo.unit.handler;
 
 import static com.example.cicd.core.enums.PathInformation.DEFAULT;
+import static com.example.cicd.core.enums.Role.ROLE_USER;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -23,10 +24,10 @@ import org.springframework.validation.Validator;
 import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.model.User;
 import com.example.cicd.core.service.impl.RedisServiceImpl;
+import com.example.cicd.core.service.impl.UserServiceImpl;
 import com.example.cicd.demo.handler.SigninHandler;
 import com.example.cicd.demo.helper.impl.SigninHandlerHelperImpl;
 import com.example.cicd.demo.router.SigninRouter;
-import com.example.cicd.demo.service.impl.UserServiceImpl;
 
 import reactor.core.publisher.Mono;
 
@@ -68,7 +69,7 @@ class SigninHandlerTest {
 		mockData.setIsActivated("true");
 		
 		List<Role> roles = new ArrayList<>();
-		roles.add(Role.ROLE_USER);
+		roles.add(ROLE_USER);
 		mockData.setRoles(roles);
 		
 		mockMap = new HashMap<String, Object>();

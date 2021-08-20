@@ -1,9 +1,12 @@
 package com.example.cicd.core.unit.util;
 
+import static com.example.cicd.core.util.PasetoUtils.compact;
+import static com.example.cicd.core.util.PasetoUtils.getClaims;
+import static com.example.cicd.core.util.PasetoUtils.valid;
+import static java.lang.reflect.Modifier.isPrivate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,13 +33,13 @@ class PasetoUtilsTest {
 	void test_private_constructor() {
 		final Constructor<?>[] constructors = PasetoUtils.class.getDeclaredConstructors();
 		for (Constructor<?> constructor : constructors) {
-			assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+			assertThat(isPrivate(constructor.getModifiers())).isTrue();
 		}
 	}
 	
 	@Test
 	void test_compact_without_claims() {
-		String test = PasetoUtils.compact(subject);
+		String test = compact(subject);
 		assertThat(test).isNotNull();
 	}
 	
@@ -45,28 +48,28 @@ class PasetoUtilsTest {
 		Map<String, Object> claims = new HashMap<String, Object>();
 		claims.put("claim_key", "claim_value");
 		
-		String test = PasetoUtils.compact(subject, claims);
+		String test = compact(subject, claims);
 		assertThat(test).isNotNull();
 	}
 	
 	@Test
 	void test_valid_pass() {
-		String token = PasetoUtils.compact(subject);
-		boolean test = PasetoUtils.valid(token);
+		String token = compact(subject);
+		boolean test = valid(token);
 		assertThat(test).isTrue();
 	}
 	
 	@Test
 	void test_valid_fail() {
-		String token = PasetoUtils.compact(subject);
-		boolean test = PasetoUtils.valid(token + "!");
+		String token = compact(subject);
+		boolean test = valid(token + "!");
 		assertThat(test).isFalse();
 	}
 	
 	@Test
 	void test_parse() {
-		String token = PasetoUtils.compact(subject);
-		Claims test = PasetoUtils.getClaims(token);
+		String token = compact(subject);
+		Claims test = getClaims(token);
 		assertThat(test).isNotNull();
 	}
 	

@@ -1,9 +1,11 @@
 package com.example.cicd.core.unit.util;
 
+import static com.example.cicd.core.util.Argon2Utils.encode;
+import static com.example.cicd.core.util.Argon2Utils.matches;
+import static java.lang.reflect.Modifier.isPrivate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Modifier;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,25 +29,25 @@ class Argon2UtilsTest {
 	void test_private_constructor() {
 		final Constructor<?>[] constructors = Argon2Utils.class.getDeclaredConstructors();
 		for (Constructor<?> constructor : constructors) {
-			assertThat(Modifier.isPrivate(constructor.getModifiers())).isTrue();
+			assertThat(isPrivate(constructor.getModifiers())).isTrue();
 		}
 	}
 	
 	@Test
 	void test_encode() {
-		String test = Argon2Utils.encode(password);
+		String test = encode(password);
 		assertThat(test).isNotNull();
 	}
 	
 	@Test
 	void test_matches_pass() {
-		boolean test = Argon2Utils.matches(password, Argon2Utils.encode(password));
+		boolean test = matches(password, encode(password));
 		assertThat(test).isTrue();
 	}
 	
 	@Test
 	void test_matches_fail() {
-		boolean test = Argon2Utils.matches(password + "!", Argon2Utils.encode(password));
+		boolean test = matches(password + "!", encode(password));
 		assertThat(test).isFalse();
 	}
 	

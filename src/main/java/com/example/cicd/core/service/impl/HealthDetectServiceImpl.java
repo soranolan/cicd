@@ -4,16 +4,18 @@ import static com.example.cicd.core.enums.LogStatement.DEFAULT;
 import static com.example.cicd.core.enums.LogStatement.LOCK;
 import static com.example.cicd.core.enums.LogStatement.SKIP;
 import static com.example.cicd.core.enums.LogStatement.UNLOCK;
+import static java.lang.String.format;
+import static java.lang.management.ManagementFactory.getMemoryMXBean;
+import static java.lang.management.ManagementFactory.getThreadMXBean;
+import static org.apache.commons.io.FileUtils.byteCountToDisplaySize;
+import static org.apache.commons.lang3.time.DurationFormatUtils.formatDurationWords;
 
 import java.io.File;
-import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryUsage;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -39,14 +41,15 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		}
 		try {
 			log.debug(DEFAULT.value(), () -> LOCK.value());
+			
 			JSONObject logParams = new JSONObject();
 			File root = new File("/");
 			long free = root.getFreeSpace();
 			long total = root.getTotalSpace();
 			long percentage = (total != 0) ? (free * 100 / total) : 0;
-			logParams.put("Free Space : ", FileUtils.byteCountToDisplaySize(free));
-			logParams.put("Total Space : ", FileUtils.byteCountToDisplaySize(total));
-			logParams.put("Remain Percentage : ", String.format("%s %%", percentage));
+			logParams.put("Free Space : ", byteCountToDisplaySize(free));
+			logParams.put("Total Space : ", byteCountToDisplaySize(total));
+			logParams.put("Remain Percentage : ", format("%s %%", percentage));
 			log.info(DEFAULT.value(), () -> logParams);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -65,14 +68,15 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		}
 		try {
 			log.debug(DEFAULT.value(), () -> LOCK.value());
+			
 			JSONObject logParams = new JSONObject();
-			MemoryUsage heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+			MemoryUsage heapMemoryUsage = getMemoryMXBean().getHeapMemoryUsage();
 			long committed = heapMemoryUsage.getCommitted();
 			long max = heapMemoryUsage.getMax();
 			long percentage = (max != 0) ? 100 - (committed * 100 / max) : 0;
-			logParams.put("Committed Heap Memory : ", FileUtils.byteCountToDisplaySize(committed));
-			logParams.put("Max Heap Memory : ", FileUtils.byteCountToDisplaySize(max));
-			logParams.put("Remain Percentage : ", String.format("%s %%", percentage));
+			logParams.put("Committed Heap Memory : ", byteCountToDisplaySize(committed));
+			logParams.put("Max Heap Memory : ", byteCountToDisplaySize(max));
+			logParams.put("Remain Percentage : ", format("%s %%", percentage));
 			log.info(DEFAULT.value(), () -> logParams);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -91,11 +95,12 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 		}
 		try {
 			log.debug(DEFAULT.value(), () -> LOCK.value());
+			
 			JSONObject logParams = new JSONObject();
-			ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+			ThreadMXBean threadMXBean = getThreadMXBean();
 			logParams.put("Thread Count : ", threadMXBean.getThreadCount());
-			logParams.put("Current Thread Cpu Time : ", DurationFormatUtils.formatDurationWords(threadMXBean.getCurrentThreadCpuTime(), true, false));
-			logParams.put("Current Thread User Time : ", DurationFormatUtils.formatDurationWords(threadMXBean.getCurrentThreadUserTime(), true, false));
+			logParams.put("Current Thread Cpu Time : ", formatDurationWords(threadMXBean.getCurrentThreadCpuTime(), true, false));
+			logParams.put("Current Thread User Time : ", formatDurationWords(threadMXBean.getCurrentThreadUserTime(), true, false));
 			log.info(DEFAULT.value(), () -> logParams);
 			
 			logParams.clear();
@@ -104,7 +109,7 @@ public class HealthDetectServiceImpl implements IHealthDetectService {
 				ThreadInfo threadInfo = threadMXBean.getThreadInfo(threadId);
 				if (threadInfo == null) { continue; }
 				logDetail.put("Thread State : ", threadInfo.getThreadState());
-				logDetail.put("Thread Cpu Time : ", DurationFormatUtils.formatDurationWords(threadMXBean.getThreadCpuTime(threadId), true, false));
+				logDetail.put("Thread Cpu Time : ", formatDurationWords(threadMXBean.getThreadCpuTime(threadId), true, false));
 				logParams.put(threadInfo.getThreadName(), logDetail);
 			}
 			log.info(DEFAULT.value(), () -> logParams);

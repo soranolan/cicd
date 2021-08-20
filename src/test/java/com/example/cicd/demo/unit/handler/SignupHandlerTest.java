@@ -1,6 +1,7 @@
 package com.example.cicd.demo.unit.handler;
 
 import static com.example.cicd.core.enums.PathInformation.DEFAULT;
+import static com.example.cicd.core.enums.Role.ROLE_USER;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -25,9 +26,9 @@ import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.model.User;
 import com.example.cicd.core.service.impl.EMailServiceImpl;
 import com.example.cicd.core.service.impl.RedisServiceImpl;
+import com.example.cicd.core.service.impl.UserServiceImpl;
 import com.example.cicd.demo.handler.SignupHandler;
 import com.example.cicd.demo.router.SignupRouter;
-import com.example.cicd.demo.service.impl.UserServiceImpl;
 
 import reactor.core.publisher.Mono;
 
@@ -69,7 +70,7 @@ class SignupHandlerTest {
 		mockUser.setEnabled(true);
 		
 		List<Role> roles = new ArrayList<>();
-		roles.add(Role.ROLE_USER);
+		roles.add(ROLE_USER);
 		mockUser.setRoles(roles);
 		
 		mockMap = new HashMap<>();

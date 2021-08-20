@@ -1,6 +1,7 @@
 package com.example.cicd.demo.service.impl;
 
 import static com.example.cicd.core.enums.LogStatement.DEFAULT;
+import static org.springframework.data.domain.Example.of;
 
 import org.json.JSONObject;
 import org.springframework.data.domain.Example;
@@ -36,7 +37,7 @@ public class TodoListServiceImpl extends BaseServiceImpl<TodoList> implements IT
 	public Flux<TodoList> findAllByCreator(String creator, String sortBy) {
 		TodoList probe = new TodoList();
 		probe.setCreator(creator);
-		Example<TodoList> example = Example.of(probe);
+		Example<TodoList> example = of(probe);
 		Sort sort = helper.buildSort(sortBy);
 		
 		JSONObject logParams = new JSONObject();
