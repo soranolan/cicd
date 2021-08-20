@@ -17,22 +17,20 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class CustomAuthenticationManager implements ReactiveAuthenticationManager {
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Mono<Authentication> authenticate(Authentication authentication) {
 		String token = authentication.getCredentials().toString();
-		Mono<Authentication> auth = Mono.just(valid(token))
-										.filter(valid -> valid)
-										.switchIfEmpty(Mono.empty())
-										.map(valid -> {
-											Claims claims = getClaims(token);
-											String username = claims.getSubject();
-											List<String> roles = claims.get("role", List.class);
-											UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, roles.stream().map(SimpleGrantedAuthority::new).collect(toList()));
-											return authToken;
-										});
-		return auth;
+		return Mono.just(valid(token))
+					.filter(valid -> valid)
+					.switchIfEmpty(Mono.empty())
+					.map(valid -> {
+						Claims claims = getClaims(token);
+						String username = claims.getSubject();
+						List<String> roles = claims.get("role", List.class);
+						return new UsernamePasswordAuthenticationToken(username, null, roles.stream().map(SimpleGrantedAuthority::new).collect(toList()));
+					});
 	}
-
+	
 }
