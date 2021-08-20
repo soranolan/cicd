@@ -21,6 +21,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import com.example.cicd.core.misc.GlobalErrorAttributes;
+
 import lombok.extern.log4j.Log4j2;
 import reactor.core.publisher.Mono;
 

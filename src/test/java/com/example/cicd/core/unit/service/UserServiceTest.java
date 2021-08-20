@@ -1,4 +1,4 @@
-package com.example.cicd.demo.unit.service;
+package com.example.cicd.core.unit.service;
 
 import static com.example.cicd.core.util.PasetoUtils.compact;
 import static org.apache.commons.collections4.MapUtils.getString;
@@ -26,8 +26,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Example;
 
 import com.example.cicd.core.model.User;
+import com.example.cicd.core.service.impl.UserServiceImpl;
 import com.example.cicd.demo.repository.IUserRepository;
-import com.example.cicd.demo.service.impl.UserServiceImpl;
 
 import reactor.core.publisher.Mono;
 

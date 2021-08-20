@@ -1,4 +1,4 @@
-package com.example.cicd.demo.service.impl;
+package com.example.cicd.core.service.impl;
 
 import static com.example.cicd.core.enums.LogStatement.DEFAULT;
 import static com.example.cicd.core.enums.Role.ROLE_USER;
@@ -20,9 +20,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.model.User;
-import com.example.cicd.core.service.impl.BaseServiceImpl;
+import com.example.cicd.core.service.IUserService;
 import com.example.cicd.demo.repository.IUserRepository;
-import com.example.cicd.demo.service.IUserService;
 
 import lombok.extern.log4j.Log4j2;
 import reactor.core.publisher.Mono;

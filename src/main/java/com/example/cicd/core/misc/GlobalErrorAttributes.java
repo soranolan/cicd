@@ -1,4 +1,4 @@
-package com.example.cicd.core.handler;
+package com.example.cicd.core.misc;
 
 import java.util.Map;
 

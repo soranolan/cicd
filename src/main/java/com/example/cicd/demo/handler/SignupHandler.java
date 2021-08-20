@@ -15,7 +15,7 @@ import com.example.cicd.core.handler.BaseHandler;
 import com.example.cicd.core.model.User;
 import com.example.cicd.core.service.IEMailService;
 import com.example.cicd.core.service.IRedisService;
-import com.example.cicd.demo.service.IUserService;
+import com.example.cicd.core.service.IUserService;
 
 import lombok.extern.log4j.Log4j2;
 import reactor.core.publisher.Mono;

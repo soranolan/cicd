@@ -26,9 +26,9 @@ import com.example.cicd.core.enums.Role;
 import com.example.cicd.core.model.User;
 import com.example.cicd.core.service.impl.EMailServiceImpl;
 import com.example.cicd.core.service.impl.RedisServiceImpl;
+import com.example.cicd.core.service.impl.UserServiceImpl;
 import com.example.cicd.demo.handler.SignupHandler;
 import com.example.cicd.demo.router.SignupRouter;
-import com.example.cicd.demo.service.impl.UserServiceImpl;
 
 import reactor.core.publisher.Mono;
 

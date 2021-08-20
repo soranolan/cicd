@@ -1,9 +1,8 @@
-package com.example.cicd.demo.service;
+package com.example.cicd.core.service;
 
 import java.util.Map;
 
 import com.example.cicd.core.model.User;
-import com.example.cicd.core.service.IBaseService;
 
 import reactor.core.publisher.Mono;
 
