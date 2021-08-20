@@ -7,9 +7,9 @@ public interface ITodoListHandlerHelper {
 	/**
 	 * modify todolist
 	 * 
-	 * @param newTodo request new todo object
-	 * @param foundTodo exist todo object
-	 * @return combine todo object
+	 * @param newTodo request new todolist object
+	 * @param foundTodo exist todolist object
+	 * @return combine todolist object
 	 */
 	public TodoList modifyCombinator(TodoList newTodo, TodoList foundTodo);
 	
