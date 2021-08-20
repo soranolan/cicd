@@ -48,6 +48,9 @@
    * GitHub for Slack
 ### Unfinished
 * Code vulnerabilities SNYK
+* Line API (Chat bot)
+* Shared to column realtime modify
+* Spring Cloud
 ### Failed
 * Reactive mongodb pagination
 * OAuth2 Github
