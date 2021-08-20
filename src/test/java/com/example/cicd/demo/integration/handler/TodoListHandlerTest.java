@@ -1,6 +1,7 @@
 package com.example.cicd.demo.integration.handler;
 
 import static com.example.cicd.core.enums.PathInformation.DEFAULT;
+import static com.example.cicd.core.enums.Role.ROLE_USER;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ class TodoListHandlerTest {
 		mockUser.setPassword("test");
 		
 		List<Role> roles = new ArrayList<>();
-		roles.add(Role.ROLE_USER);
+		roles.add(ROLE_USER);
 		mockUser.setRoles(roles);
 	}
 	

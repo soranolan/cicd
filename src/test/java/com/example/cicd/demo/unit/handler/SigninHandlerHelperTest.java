@@ -1,5 +1,6 @@
 package com.example.cicd.demo.unit.handler;
 
+import static com.example.cicd.core.util.Argon2Utils.encode;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
@@ -11,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.cicd.core.model.User;
-import com.example.cicd.core.util.Argon2Utils;
 import com.example.cicd.demo.helper.impl.SigninHandlerHelperImpl;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,7 +38,7 @@ class SigninHandlerHelperTest {
 		exist = new User();
 		exist.setId("exist");
 		exist.setUsername(username);
-		exist.setPassword(Argon2Utils.encode("password"));
+		exist.setPassword(encode("password"));
 		exist.setEnabled(true);
 		exist.setRoles(null);
 	}

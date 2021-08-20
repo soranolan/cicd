@@ -1,15 +1,14 @@
 package com.example.cicd.core.service.impl;
 
 import static com.example.cicd.core.enums.LogStatement.DEFAULT;
-
-import java.util.Optional;
+import static com.example.cicd.core.util.DateUtils.now;
+import static java.util.Optional.ofNullable;
 
 import org.json.JSONObject;
 
 import com.example.cicd.core.model.BaseDocument;
 import com.example.cicd.core.repository.IBaseRepository;
 import com.example.cicd.core.service.IBaseService;
-import com.example.cicd.core.util.DateUtils;
 
 import lombok.extern.log4j.Log4j2;
 import reactor.core.publisher.Mono;
@@ -34,9 +33,9 @@ public class BaseServiceImpl<T extends BaseDocument> implements IBaseService<T> 
 	
 	@Override
 	public Mono<T> add(T entity) {
-		String now = DateUtils.now();
-		if (Optional.ofNullable(entity.getCreatedAt()).isEmpty()) { entity.setCreatedAt(now); }
-		if (Optional.ofNullable(entity.getUpdatedAt()).isEmpty()) { entity.setUpdatedAt(now); }
+		String now = now();
+		if (ofNullable(entity.getCreatedAt()).isEmpty()) { entity.setCreatedAt(now); }
+		if (ofNullable(entity.getUpdatedAt()).isEmpty()) { entity.setUpdatedAt(now); }
 		
 		JSONObject logParams = new JSONObject();
 		logParams.put("entity", entity);
@@ -47,7 +46,7 @@ public class BaseServiceImpl<T extends BaseDocument> implements IBaseService<T> 
 	
 	@Override
 	public Mono<T> modify(T entity) {
-		String now = DateUtils.now();
+		String now = now();
 		entity.setUpdatedAt(now);
 		
 		JSONObject logParams = new JSONObject();

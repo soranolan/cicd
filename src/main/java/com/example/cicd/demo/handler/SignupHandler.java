@@ -55,6 +55,7 @@ public class SignupHandler extends BaseHandler {
 		logParams.put("username", username);
 		log.info(DEFAULT.value(), () -> logParams);
 		
+		// first redis, then db
 		Mono<User> user = redisService.get(username).switchIfEmpty(Mono.defer(() -> userService.findOneByUsername(username)));
 		return okResponse(user, User.class);
 	}

@@ -10,7 +10,7 @@ public interface ITodoListService extends IBaseService<TodoList> {
 	/**
 	 * find all by creator
 	 * 
-	 * @param creator user id
+	 * @param creator user name, user id, account id
 	 * @param sortBy sort with order
 	 * @return TodoList
 	 */

@@ -1,5 +1,8 @@
 package com.example.cicd.core.util;
 
+import static com.example.cicd.core.enums.DateFormat.NANO;
+import static java.time.format.DateTimeFormatter.ofPattern;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,12 +14,23 @@ public class DateUtils {
 		throw new IllegalStateException("Utility class");
 	}
 	
+	/**
+	 * yyyy-MM-dd HH:mm:ss.nnnnnnnnn
+	 * 
+	 * @return now
+	 */
 	public static String now() {
-		return now(DateFormat.NANO);
+		return now(NANO);
 	}
 	
+	/**
+	 * now
+	 * 
+	 * @param pattern pattern
+	 * @return format now
+	 */
 	public static String now(DateFormat pattern) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern.value());
+		DateTimeFormatter formatter = ofPattern(pattern.value());
 		LocalDateTime now = LocalDateTime.now();
 		return now.format(formatter);
 	}

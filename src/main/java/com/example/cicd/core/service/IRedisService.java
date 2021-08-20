@@ -6,10 +6,28 @@ import reactor.core.publisher.Mono;
 
 public interface IRedisService {
 	
+	/**
+	 * insert
+	 * 
+	 * @param user insert user object
+	 * @return user object
+	 */
 	public Mono<User> set(User user);
 	
+	/**
+	 * query 
+	 * 
+	 * @param key user name, user id, account id
+	 * @return user object
+	 */
 	public Mono<User> get(String key);
 	
-	public Mono<User> activate(User entity);
+	/**
+	 * activate account
+	 * 
+	 * @param user modify user object
+	 * @return user object
+	 */
+	public Mono<User> activate(User user);
 	
 }

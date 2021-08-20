@@ -1,6 +1,7 @@
 package com.example.cicd.demo.unit.handler;
 
 import static com.example.cicd.core.enums.PathInformation.DEFAULT;
+import static com.example.cicd.core.enums.Role.ROLE_USER;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -69,7 +70,7 @@ class SignupHandlerTest {
 		mockUser.setEnabled(true);
 		
 		List<Role> roles = new ArrayList<>();
-		roles.add(Role.ROLE_USER);
+		roles.add(ROLE_USER);
 		mockUser.setRoles(roles);
 		
 		mockMap = new HashMap<>();

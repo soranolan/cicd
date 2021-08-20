@@ -1,8 +1,9 @@
 package com.example.cicd.core.model;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -29,23 +30,30 @@ public class User extends BaseDocument implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
+	/** user name, user id, account id */
 	@NotNull
 	@Size(min = 1, max = 24)
 	@Pattern(regexp = "^[a-zA-Z0-9]*$")
 	private String username;
 	
+	/** password */
 	@NotNull
 	@Size(min = 1, max = 24)
 	private String password;
 	
+	/** email address */
 	private String email;
 	
+	/** is account activated by email */
 	private String isActivated;
 	
+	/** temp login system error message */
 	private String systemMessage;
 	
+	/** is enabled */
 	private boolean enabled;
 	
+	/** user roles */
 	private List<Role> roles;
 	
 	@Override
@@ -73,7 +81,7 @@ public class User extends BaseDocument implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles.stream()
 					.map(authority -> new SimpleGrantedAuthority(authority.name()))
-					.collect(Collectors.toList());
+					.collect(toList());
 	}
 	
 	@Override

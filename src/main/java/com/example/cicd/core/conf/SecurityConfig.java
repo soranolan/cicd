@@ -1,8 +1,7 @@
 package com.example.cicd.core.conf;
 
 import static com.example.cicd.core.enums.PathInformation.DEFAULT;
-
-import java.util.Arrays;
+import static java.util.Arrays.asList;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
@@ -50,9 +49,9 @@ public class SecurityConfig {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:8081", "https://vue-ci-cd-practice.herokuapp.com"));
-		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+		config.setAllowedOrigins(asList("http://localhost:8081", "https://vue-ci-cd-practice.herokuapp.com"));
+		config.setAllowedMethods(asList("GET", "POST", "PUT", "DELETE"));
+		config.setAllowedHeaders(asList("Content-Type", "Authorization"));
 		
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);

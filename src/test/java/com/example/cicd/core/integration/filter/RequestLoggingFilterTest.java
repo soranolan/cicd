@@ -1,6 +1,7 @@
 package com.example.cicd.core.integration.filter;
 
 import static com.example.cicd.core.enums.PathInformation.DEFAULT;
+import static com.example.cicd.core.enums.Role.ROLE_USER;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ class RequestLoggingFilterTest {
 		mockData.setEnabled(true);
 		
 		List<Role> roles = new ArrayList<>();
-		roles.add(Role.ROLE_USER);
+		roles.add(ROLE_USER);
 		mockData.setRoles(roles);
 	}
 	

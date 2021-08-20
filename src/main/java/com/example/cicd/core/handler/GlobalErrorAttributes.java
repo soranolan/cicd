@@ -12,10 +12,10 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
 	
 	@Override
 	public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
-		Map<String, Object> map = super.getErrorAttributes(request, options);
+		Map<String, Object> errorAttributes = super.getErrorAttributes(request, options);
 		Throwable e = getError(request);
-		map.put("message", e.getMessage());
-		return map;
+		errorAttributes.put("message", e.getMessage());
+		return errorAttributes;
 	}
 	
 }

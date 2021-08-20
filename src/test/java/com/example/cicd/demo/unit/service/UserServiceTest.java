@@ -1,5 +1,6 @@
 package com.example.cicd.demo.unit.service;
 
+import static com.example.cicd.core.util.PasetoUtils.compact;
 import static org.apache.commons.collections4.MapUtils.getString;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -25,7 +26,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Example;
 
 import com.example.cicd.core.model.User;
-import com.example.cicd.core.util.PasetoUtils;
 import com.example.cicd.demo.repository.IUserRepository;
 import com.example.cicd.demo.service.impl.UserServiceImpl;
 
@@ -55,7 +55,7 @@ class UserServiceTest {
 		
 		mockMap = new HashMap<>();
 		mockMap.put("username", "test");
-		mockMap.put("token", PasetoUtils.compact("test"));
+		mockMap.put("token", compact("test"));
 		mockMap.put("email", "email");
 	}
 	

@@ -4,7 +4,7 @@ public enum SortDirection {
 	
 	ASC("ASC"),
 	
-	DESC("DESC");;
+	DESC("DESC");
 	
 	private final String value;
 	

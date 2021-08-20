@@ -4,11 +4,11 @@ public enum LogStatement {
 	
 	DEFAULT("[SEARCH_TAG] logParams >>> [{}]"),
 	
-	LOCK("lock"),
+	LOCK("lock"),																									// own lock
 	
-	UNLOCK("unlock"),
+	UNLOCK("unlock"),																								// release lock
 	
-	SKIP("skip");
+	SKIP("skip");																									// skip
 	
 	private final String value;
 	
