@@ -5,12 +5,15 @@ import static com.example.cicd.core.util.DateUtils.now;
 import static java.util.Optional.ofNullable;
 
 import org.json.JSONObject;
+import org.reactivestreams.Publisher;
+import org.springframework.data.domain.Example;
 
 import com.example.cicd.core.model.BaseDocument;
 import com.example.cicd.core.repository.IBaseRepository;
 import com.example.cicd.core.service.IBaseService;
 
 import lombok.extern.log4j.Log4j2;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Log4j2
@@ -29,6 +32,15 @@ public class BaseServiceImpl<T extends BaseDocument> implements IBaseService<T> 
 		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.findById(id);
+	}
+	
+	@Override
+	public Flux<T> findAll(Example<T> example) {
+		JSONObject logParams = new JSONObject();
+		logParams.put("example", example);
+		log.info(DEFAULT.value(), () -> logParams);
+		
+		return repository.findAll(example);
 	}
 	
 	@Override
@@ -63,6 +75,11 @@ public class BaseServiceImpl<T extends BaseDocument> implements IBaseService<T> 
 		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.deleteById(id);
+	}
+	
+	@Override
+	public Mono<Void> deleteAll(Publisher<T> entityStream) {
+		return repository.deleteAll(entityStream);
 	}
 	
 }
