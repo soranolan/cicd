@@ -23,12 +23,14 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.reactivestreams.Publisher;
 import org.springframework.data.domain.Example;
 
 import com.example.cicd.core.model.User;
 import com.example.cicd.core.service.impl.UserServiceImpl;
 import com.example.cicd.demo.repository.IUserRepository;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
@@ -71,6 +73,17 @@ class UserServiceTest {
 	}
 	
 	@Test
+	void test_findAll() {
+		Flux<User> expect = Flux.just(mockData);
+		when(repository.findAll(ArgumentMatchers.<Example<User>>any())).thenReturn(expect);
+		Flux<User> test = service.findAll("false");
+		
+		assertThat(test).isNotNull().isEqualTo(expect);
+		verify(repository, times(1)).findAll(ArgumentMatchers.<Example<User>>any());
+		verifyNoMoreInteractions(repository);
+	}
+	
+	@Test
 	void test_add_withOut_createdAt() {
 		Mono<User> expect = Mono.just(mockData);
 		when(repository.insert(any(User.class))).thenReturn(expect);
@@ -100,6 +113,18 @@ class UserServiceTest {
 		
 		assertThat(test).isNotNull().isEqualTo(expect);
 		verify(repository, times(1)).insert(any(User.class));
+	}
+	
+	@Test
+	void test_deleteAll() {
+		Flux<User> mockUser = Flux.just(mockData);
+		Mono<Void> expect = Mono.empty();
+		when(repository.deleteAll(ArgumentMatchers.<Publisher<User>>any())).thenReturn(expect);
+		Mono<Void> test = service.deleteAll(mockUser);
+		
+		assertThat(test).isNotNull().isEqualTo(expect);
+		verify(repository, times(1)).deleteAll(ArgumentMatchers.<Publisher<User>>any());
+		verifyNoMoreInteractions(repository);
 	}
 	
 	@Test

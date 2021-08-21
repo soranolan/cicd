@@ -24,6 +24,7 @@ import com.example.cicd.core.service.IUserService;
 import com.example.cicd.demo.repository.IUserRepository;
 
 import lombok.extern.log4j.Log4j2;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Log4j2
@@ -56,6 +57,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 		log.info(DEFAULT.value(), () -> logParams);
 		
 		return repository.findOne(example);
+	}
+	
+	@Override
+	public Flux<User> findAll(String isActivated) {
+		User probe = new User();
+		probe.setIsActivated(isActivated);
+		Example<User> example = of(probe);
+		
+		return super.findAll(example);
 	}
 	
 	@Override

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.example.cicd.core.model.User;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface IUserService extends IBaseService<User> {
@@ -24,6 +25,14 @@ public interface IUserService extends IBaseService<User> {
 	 * @return User
 	 */
 	public Mono<User> findOneByUsername(String username, String isActivated);
+	
+	/**
+	 * find all by isActivated
+	 * 
+	 * @param isActivated true or false
+	 * @return User
+	 */
+	public Flux<User> findAll(String isActivated);
 	
 	/**
 	 * validate token then find the sign in db user
