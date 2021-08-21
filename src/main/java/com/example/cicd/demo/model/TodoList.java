@@ -31,7 +31,7 @@ public class TodoList extends BaseDocument implements Serializable {
 	private String content;
 	
 	/** expiration date */
-	@Size(min = 24, max = 24)
+	@Size(min = 0, max = 24)
 	private String expirationDate;
 	
 	/** create by user id */
@@ -40,7 +40,7 @@ public class TodoList extends BaseDocument implements Serializable {
 	private String creator;
 	
 	/** shared to user id */
-	@Size(min = 1, max = 120)
+	@Size(min = 0, max = 120)
 	private String[] sharedTo;
 	
 	@Override
