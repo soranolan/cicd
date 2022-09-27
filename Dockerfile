@@ -5,11 +5,11 @@ FROM gradle:jdk15-hotspot AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 
-ARG testarg=$IS_STAGING
+ARG test_arg=$IS_STAGING
 
 RUN echo "start"
 RUN echo "test arg is"
-RUN echo ${testarg}
+RUN echo $test_arg
 RUN echo "end"
 
 RUN gradle build
