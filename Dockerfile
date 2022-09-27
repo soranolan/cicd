@@ -1,3 +1,5 @@
+RUN echo $PASETO_AUDIENCE
+
 #
 # Build stage
 #
