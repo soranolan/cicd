@@ -6,7 +6,9 @@ COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 
 RUN echo "start"
-RUN echo ${process.env.RENDER_SERVICE_TYPE}
+RUN echo "$RENDER_SERVICE_TYPE"
+RUN echo "${RENDER_SERVICE_TYPE}"
+RUN echo $RENDER_SERVICE_TYPE
 RUN echo ${PASETO_AUDIENCE}
 RUN echo "end"
 
