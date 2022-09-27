@@ -1,11 +1,10 @@
-RUN echo $PASETO_AUDIENCE
-
 #
 # Build stage
 #
 FROM gradle:jdk15-hotspot AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
+RUN echo $PASETO_AUDIENCE
 RUN gradle build
 
 #
