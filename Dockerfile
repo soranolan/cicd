@@ -1,13 +1,11 @@
 FROM gradle:jdk15-hotspot AS build
+
+RUN echo $IS_STAGING
+ARG test_arg=$IS_STAGING
+RUN echo $test_arg
+
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-ARG test_arg=$IS_STAGING
-RUN echo "start"
-RUN echo "IS_STAGING is"
-RUN echo $IS_STAGING
-RUN echo "test arg is"
-RUN echo $test_arg
-RUN echo "end"
 RUN gradle build
 
 FROM openjdk:15
