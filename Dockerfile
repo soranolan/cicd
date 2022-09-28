@@ -1,8 +1,11 @@
 FROM gradle:jdk15-hotspot AS build
 
-RUN echo $IS_STAGING
-ARG test_arg=$IS_STAGING
-RUN echo $test_arg
+RUN echo "this one? $IS_STAGING"
+RUN echo "or this one? ${IS_STAGING}"
+ARG test_arg_1=$IS_STAGING
+ARG test_arg_2=${IS_STAGING}
+RUN echo "this one? $test_arg_1"
+RUN echo "or this one? ${test_arg_2}"
 
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
