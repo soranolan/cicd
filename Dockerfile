@@ -1,7 +1,7 @@
 FROM gradle:jdk15-hotspot AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-RUN clean gradle build -x test
+RUN gradle clean build -x test
 
 FROM openjdk:15
 RUN mkdir /app
