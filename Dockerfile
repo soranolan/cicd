@@ -2,8 +2,7 @@ ARG test_arg=$IS_STAGING
 
 FROM gradle:jdk15-hotspot AS build
 
-RUN echo "this one? $IS_STAGING"
-RUN echo "or this one? ${IS_STAGING}"
+ARG test_arg
 RUN echo "this one? $test_arg"
 RUN echo "or this one? ${test_arg}"
 
