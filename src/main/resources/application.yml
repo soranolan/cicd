@@ -17,9 +17,9 @@ spring:
       exclude: static/**,templates/**
   redis:
     database: 0
-    host: redis-16827.c1.asia-northeast1-1.gce.cloud.redislabs.com
-    port: 16827
-    password: ENC(sQQmP/bjPsMyCavNR1RP7OrLaT/xYLUVGdliKjL6fWgbhrYs2Upk3ILvaOrIP1q7hBU9+Byajs9AFUG9EE1DDFmF9SjeMSCurg35r9198X0=)
+    host: redis-16854.c1.asia-northeast1-1.gce.cloud.redislabs.com
+    port: 16854
+    password: ENC(0CZeyyG3UlwUejW2u6fd9cHMMp9w0biSKaxcWze5jTpuh7hgtJOI9CausYwEBbfHHC43dCp7Q0BzitbPN3gpwYfcWBV9dIXqN8qJL3+BszE=)
   mail:
     host: smtp.gmail.com
     port: 587
